@@ -1,255 +1,315 @@
 # synthforge - AI-Driven Development Environment
+# synthforge - AI 驅動的開發環境
 
-> **🤖 FOR AI AGENTS**: Read [VIBE_GUIDE.md](VIBE_GUIDE.md) FIRST before proceeding. It contains the entry point and navigation guide for this workspace.
+> **🤖 FOR AI AGENTS**: Read [VIBE_GUIDE.md](VIBE_GUIDE.md) FIRST before proceeding.  
+> **給 AI 代理**: 請先閱讀 [VIBE_GUIDE.md](VIBE_GUIDE.md)。
 
-> **給 AI 代理**: 在繼續之前，請先閱讀 [VIBE_GUIDE.md](VIBE_GUIDE.md)。它包含此工作區的入口點和導航指南。
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/xx8897/synthforge)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Status](https://img.shields.io/badge/status-Production%20Ready-success.svg)](docs/architecture/ROADMAP.md)
 
 ---
 
-> A comprehensive, AI-driven development environment with professional devtools, multi-language support, and security-first design.
+## 🎯 What is synthforge? / 什麼是 synthforge？
 
-## 🎯 Vision
+**synthforge** is a production-ready AI development environment that automates your entire development workflow from specification to deployment.
 
-This workspace is designed to be your **personal AI development lab** - a centralized platform where you can:
-- Build reusable AI capabilities (Skills)
-- Create specialized AI agents (Agents)
-- Develop projects that leverage these shared resources
-- Scale from prototype to production seamlessly
+**synthforge** 是一個生產就緒的 AI 開發環境，可自動化從規格到部署的整個開發工作流程。
 
-## 🏗️ Architecture Overview
+### Key Features / 核心功能
 
-This workspace follows a **Studio/Monorepo** pattern where everything lives together:
+- **🤖 4 Specialized AI Agents** - Planner, Executor, Reviewer, Self-Improvement
+- **⚡ Automated Workflows** - TDD, Feature Development, Bug Fixing, Refactoring
+- **🔧 Unified CLI** - One command for all operations
+- **📋 22 Governance Rules** - Ensure code quality and consistency
+- **🌳 Git Worktrees** - Isolated development environments
+- **🔒 Security First** - Built-in security scanning and auditing
 
-```
-AI_Workspace/
-├── 🧠 agents/          # AI personas with specific roles
-├── 🛠️ skills/         # Reusable capabilities
-├── 📂 projects/        # Your actual work
-├── 🔌 core_lib/        # The SDK that ties everything together
-└── [30+ supporting systems for production readiness]
-```
+---
 
-### Key Principles
+## 🚀 Quick Start / 快速開始
 
-1. **Write Once, Use Everywhere**: Skills and agents are shared across all projects
-2. **Modular & Extensible**: Each component is independent and pluggable
-3. **Production-Ready**: Built-in observability, testing, and deployment
-4. **Developer-Friendly**: Templates, automation, and great DX
+### Prerequisites / 前置需求
 
-## 📚 Documentation
+- Python 3.8+
+- Git 2.30+
+- Windows/Linux/macOS
 
-- **[ARCHITECTURE.md](./ARCHITECTURE.md)** - Detailed system design and patterns
-- **[FEATURES.md](./FEATURES.md)** - Complete feature catalog (30+ features)
-- **[ROADMAP.md](./ROADMAP.md)** - Implementation phases and priorities
-- **[QUICKSTART.md](./QUICKSTART.md)** - Get started in 5 minutes
-- **[AGENT_RULES.md](./AGENT_RULES.md)** - ⚠️ Mandatory rules for all agents (bilingual documentation standards)
-
-## 🚀 Quick Start
+### Installation / 安裝
 
 ```bash
-# 1. Navigate to workspace
-cd C:\Users\xx8897\ai_workspace
+# Clone the repository
+git clone https://github.com/xx8897/synthforge.git
+cd synthforge
 
-# 2. Set up Python environment
-python -m venv .venv
-.venv\Scripts\activate
-
-# 3. Install dependencies
-pip install -r requirements/base.txt
-
-# 4. Create your first project
-python core_lib/cli.py new-project --name=my_first_project
-
-# 5. Start building!
-cd projects/my_first_project
+# Install dependencies (if needed)
+# pip install -r requirements.txt
 ```
 
-## 🎓 Core Concepts
-
-### Skills
-**Reusable capabilities** that agents can use. Think of them as tools in a toolbox.
-- Example: `web_search`, `file_operations`, `data_analysis`
-- Located in: `skills/`
-- Versioned for stability
-
-### Agents
-**AI personas** with specific roles and expertise.
-- Example: `researcher`, `coder`, `writer`
-- Located in: `agents/`
-- Can use multiple skills
-
-### Projects
-**Your actual work** that uses agents and skills.
-- Example: `game_bot`, `data_pipeline`, `web_scraper`
-- Located in: `projects/`
-- Each project is its own git repository
-
-## 🌟 Feature Highlights
-
-This workspace includes **30 enterprise-grade features**:
-
-### Foundation (Phase 1)
-- ✅ Templates System - Instant project scaffolding
-- ✅ Core Library - Unified SDK
-- ✅ Shared Environment - One venv for all
-
-### Production (Phase 2-3)
-- 📊 Observability - Logs, metrics, monitoring
-- 🏷️ Versioning - Prevent breaking changes
-- 💰 Cost Tracking - Control API spending
-- 🚢 Deployment - Docker, K8s, serverless
-
-### Advanced (Phase 4-5)
-- 🎭 Multi-Model Orchestration - Auto-select best model
-- 🔄 Workflow Orchestration - Multi-agent pipelines
-- 🧠 Self-Improving Agents - Learn from mistakes
-- 🎨 Dynamic Skill Composition - Auto-generate new skills
-
-See [FEATURES.md](./FEATURES.md) for the complete list.
-
-## 📊 Current Status
-
-**Phase**: Planning & Documentation ✅  
-**Next**: Foundation Implementation
-
-## 🤝 Contributing
-
-This is your personal workspace, but the architecture is designed to support:
-- Team collaboration (multi-tenancy)
-- Skill sharing (federation)
-- Plugin ecosystem
-
-## 📄 License
-
-Personal use. Extend as needed.
-
----
-
-**Built with**: Python, Modern AI practices, Enterprise patterns  
-**Inspired by**: OpenAI, Anthropic, Google DeepMind internal tools
-
----
-
-# AI 工作區 - 世界級 AI 開發平台
-
-> 一個全面的、生產級的環境，用於在所有專案中開發、管理和部署 AI Agent 和技能。
-
-## 🎯 願景
-
-此工作區旨在成為您的**個人 AI 開發實驗室** - 一個集中式平台，您可以：
-- 建立可重複使用的 AI 能力（技能）
-- 創建專業化的 AI Agent（代理）
-- 開發利用這些共享資源的專案
-- 從原型無縫擴展到生產環境
-
-## 🏗️ 架構概覽
-
-此工作區遵循 **Studio/Monorepo** 模式，所有內容都在一起：
-
-```
-AI_Workspace/
-├── 🧠 agents/          # 具有特定角色的 AI 角色
-├── 🛠️ skills/         # 可重複使用的能力
-├── 📂 projects/        # 您的實際工作
-├── 🔌 core_lib/        # 將所有內容連接在一起的 SDK
-└── [30+ 個生產就緒的支援系統]
-```
-
-### 核心原則
-
-1. **寫一次，到處使用**：技能和 Agent 在所有專案中共享
-2. **模組化且可擴展**：每個組件都是獨立且可插拔的
-3. **生產就緒**：內建可觀測性、測試和部署
-4. **開發者友好**：模板、自動化和出色的開發體驗
-
-## 📚 文檔
-
-- **[ARCHITECTURE.md](./ARCHITECTURE.md)** - 詳細的系統設計和模式
-- **[FEATURES.md](./FEATURES.md)** - 完整的功能目錄（30+ 個功能）
-- **[ROADMAP.md](./ROADMAP.md)** - 實施階段和優先級
-- **[QUICKSTART.md](./QUICKSTART.md)** - 5 分鐘快速開始
-- **[AGENT_RULES.md](./AGENT_RULES.md)** - ⚠️ 所有 Agent 的強制性規則（雙語文檔標準）
-
-## 🚀 快速開始
+### Basic Usage / 基本使用
 
 ```bash
-# 1. 導航到工作區
-cd C:\Users\xx8897\ai_workspace
+# Interactive mode - recommended for beginners
+# 互動模式 - 推薦給初學者
+python devtools/cli.py interactive
 
-# 2. 設置 Python 環境
-python -m venv .venv
-.venv\Scripts\activate
+# List all available workflows
+# 列出所有可用的工作流
+python devtools/cli.py workflow list
 
-# 3. 安裝依賴項
-pip install -r requirements/base.txt
+# Run a feature development workflow
+# 執行功能開發工作流
+python devtools/cli.py workflow run workflows/templates/feature_development.yml
 
-# 4. 創建您的第一個專案
-python core_lib/cli.py new-project --name=my_first_project
+# Git operations
+# Git 操作
+python devtools/cli.py git commit -m "feat: add new feature" -a
+python devtools/cli.py git push
+python devtools/cli.py git pr --title "New Feature"
 
-# 5. 開始建構！
-cd projects/my_first_project
+# Security check
+# 安全檢查
+python devtools/cli.py check --all
 ```
-
-## 🎓 核心概念
-
-### 技能 (Skills)
-Agent 可以使用的**可重複使用的能力**。將它們視為工具箱中的工具。
-- 範例：`web_search`, `file_operations`, `data_analysis`
-- 位於：`skills/`
-- 版本化以確保穩定性
-
-### 代理 (Agents)
-具有特定角色和專業知識的 **AI 角色**。
-- 範例：`researcher`, `coder`, `writer`
-- 位於：`agents/`
-- 可以使用多個技能
-
-### 專案 (Projects)
-使用 Agent 和技能的**您的實際工作**。
-- 範例：`game_bot`, `data_pipeline`, `web_scraper`
-- 位於：`projects/`
-- 每個專案都是自己的 git 儲存庫
-
-## 🌟 功能亮點
-
-此工作區包含 **30 個企業級功能**：
-
-### 基礎（階段 1）
-- ✅ 模板系統 - 即時專案腳手架
-- ✅ 核心庫 - 統一的 SDK
-- ✅ 共享環境 - 所有專案使用一個 venv
-
-### 生產（階段 2-3）
-- 📊 可觀測性 - 日誌、指標、監控
-- 🏷️ 版本控制 - 防止破壞性變更
-- 💰 成本追蹤 - 控制 API 支出
-- 🚢 部署 - Docker、K8s、無伺服器
-
-### 進階（階段 4-5）
-- 🎭 多模型編排 - 自動選擇最佳模型
-- 🔄 工作流編排 - 多 Agent 管道
-- 🧠 自我改進的 Agent - 從錯誤中學習
-- 🎨 動態技能組合 - 自動生成新技能
-
-查看 [FEATURES.md](./FEATURES.md) 以獲取完整列表。
-
-## 📊 當前狀態
-
-**階段**: 規劃與文檔 ✅  
-**下一步**: 基礎實施
-
-## 🤝 貢獻
-
-這是您的個人工作區，但架構設計支援：
-- 團隊協作（多租戶）
-- 技能共享（聯邦）
-- 插件生態系統
-
-## 📄 授權
-
-個人使用。根據需要擴展。
 
 ---
 
-**建構使用**: Python, 現代 AI 實踐, 企業模式  
-**靈感來自**: OpenAI, Anthropic, Google DeepMind 內部工具
+## 📁 Project Structure / 專案結構
+
+```
+synthforge/
+├── 📄 README.md                 ← You are here / 你在這裡
+├── 📄 VIBE_GUIDE.md             ← AI agent entry point / AI 代理入口
+├── 📄 LICENSE                   ← MIT License
+│
+├── 📁 rules/                    ← 22 governance rules / 22 條治理規則
+│   ├── core/                    ← Mandatory rules / 強制規則
+│   ├── development/             ← Development rules / 開發規則
+│   └── management/              ← Management rules / 管理規則
+│
+├── 📁 devtools/                 ← Development toolkit / 開發工具包
+│   ├── cli.py                   ← Unified CLI / 統一 CLI
+│   ├── security/                ← Security tools / 安全工具
+│   ├── analyzers/               ← Code analyzers / 代碼分析器
+│   └── knowledge_graph.py       ← Knowledge mapping / 知識映射
+│
+├── 📁 workflows/                ← Automated workflows / 自動化工作流
+│   ├── engine/                  ← Workflow engine / 工作流引擎
+│   └── templates/               ← Workflow templates / 工作流模板
+│
+├── 📁 agents/                   ← AI agents / AI 代理
+│   ├── planner_agent/           ← Planning & design / 規劃與設計
+│   ├── executor_agent/          ← Implementation / 實作
+│   ├── reviewer_agent/          ← Code review / 代碼審查
+│   └── self_improvement_agent/  ← Learning / 學習
+│
+├── 📁 skills/                   ← Reusable capabilities / 可重用能力
+│   ├── automation/              ← Structure management / 結構管理
+│   └── workflow_skills/         ← Spec parser, task generator / 規格解析器、任務生成器
+│
+├── 📁 core_lib/                 ← Shared infrastructure / 共享基礎設施
+│   ├── utils/                   ← Utilities / 工具
+│   └── git/                     ← Git automation / Git 自動化
+│
+└── 📁 docs/                     ← Documentation / 文件
+    ├── architecture/            ← System design / 系統設計
+    └── guides/                  ← User guides / 使用指南
+```
+
+---
+
+## 🔄 Git Workflow / Git 工作流程
+
+synthforge uses **Feature Branch Workflow** with **Git Worktrees** for clean, isolated development.
+
+synthforge 使用**功能分支工作流程**和 **Git Worktrees** 來實現乾淨、隔離的開發。
+
+### Recommended Workflow / 推薦工作流程
+
+```bash
+# 1. Start a new feature
+# 1. 開始新功能
+python devtools/cli.py workflow run workflows/templates/feature_development.yml
+
+# This will:
+# 這將會：
+# - Create a new branch (e.g., feature/user-auth)
+# - Set up a Git worktree (isolated workspace)
+# - Guide you through TDD implementation
+# - Run tests automatically
+# - Create a PR when done
+
+# 2. Commit changes
+# 2. 提交變更
+python devtools/cli.py git commit -m "feat: add user authentication" -a
+
+# 3. Push to remote
+# 3. 推送到遠端
+python devtools/cli.py git push
+
+# 4. Create pull request
+# 4. 創建 Pull Request
+python devtools/cli.py git pr --title "Add User Authentication" --body "Implements login/logout"
+
+# 5. After PR is merged, cleanup
+# 5. PR 合併後，清理
+git worktree remove .worktrees/feature_user-auth
+git branch -d feature/user-auth
+```
+
+### Manual Git Operations / 手動 Git 操作
+
+If you prefer manual control:
+
+如果您偏好手動控制：
+
+```bash
+# Standard git commands work as usual
+git add .
+git commit -m "feat: your message"
+git push origin main
+
+# Or use the CLI for convenience
+python devtools/cli.py git commit -m "feat: your message" -a
+```
+
+---
+
+## 📊 Current Status / 當前狀態
+
+| Phase | Status | Completion |
+|-------|--------|------------|
+| **Phase 1: Foundation** | ✅ Complete | 100% |
+| **Phase 2: Developer Experience** | ✅ Complete | 100% |
+| **Phase 3: Intelligence** | ✅ Complete | 100% |
+| **Phase 4: Production & Scale** | 🚧 In Progress | 20% |
+
+See [ROADMAP.md](docs/architecture/ROADMAP.md) for detailed progress.
+
+查看 [ROADMAP.md](docs/architecture/ROADMAP.md) 了解詳細進度。
+
+---
+
+## 📚 Documentation / 文件
+
+- **[VIBE_GUIDE.md](VIBE_GUIDE.md)** - AI agent entry point / AI 代理入口
+- **[ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md)** - System architecture / 系統架構
+- **[ROADMAP.md](docs/architecture/ROADMAP.md)** - Feature roadmap / 功能路線圖
+- **[GIT_WORKFLOW.md](docs/guides/GIT_WORKFLOW.md)** - Git workflow guide / Git 工作流程指南
+- **[rules/README.md](rules/README.md)** - All governance rules / 所有治理規則
+
+---
+
+## 🎯 Core Principles / 核心原則
+
+1. **Automation First** - Automate repetitive tasks / 自動化優先
+2. **Test-Driven Development** - Write tests first / 測試驅動開發
+3. **Security by Default** - Built-in security checks / 預設安全
+4. **Documentation as Code** - Keep docs in sync / 文件即代碼
+5. **Continuous Improvement** - Learn from every iteration / 持續改進
+
+---
+
+## 🛠️ Available Commands / 可用命令
+
+### Workflow Commands / 工作流命令
+
+```bash
+python devtools/cli.py workflow list              # List all workflows
+python devtools/cli.py workflow run <file>        # Run a workflow
+python devtools/cli.py workflow validate <file>   # Validate workflow
+```
+
+### Git Commands / Git 命令
+
+```bash
+python devtools/cli.py git commit -m "message"    # Commit changes
+python devtools/cli.py git push                   # Push to remote
+python devtools/cli.py git pr --title "title"     # Create PR
+```
+
+### Project Commands / 專案命令
+
+```bash
+python devtools/cli.py new --name=<name>          # Create new project
+python devtools/cli.py check --all                # Run all checks
+python devtools/cli.py analyze <path>             # Analyze dependencies
+```
+
+### Utility Commands / 工具命令
+
+```bash
+python devtools/cli.py info                       # Show system info
+python devtools/cli.py interactive                # Interactive mode
+python devtools/cli.py help                       # Show help
+```
+
+---
+
+## 🤝 Contributing / 貢獻
+
+This is a personal project, but contributions are welcome!
+
+這是個人專案，但歡迎貢獻！
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License / 授權
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+本專案採用 MIT 授權 - 詳見 [LICENSE](LICENSE) 文件。
+
+**What this means / 這意味著什麼**:
+- ✅ You can use this commercially / 可商業使用
+- ✅ You can modify it / 可修改
+- ✅ You can distribute it / 可分發
+- ✅ You can use it privately / 可私人使用
+- ⚠️ You must include the license / 必須包含授權聲明
+- ⚠️ No warranty provided / 不提供保證
+
+---
+
+## 👤 Author / 作者
+
+**xx8897**
+
+- GitHub: [@xx8897](https://github.com/xx8897)
+- Email: zhixiang8897@gmail.com
+
+---
+
+## 🙏 Acknowledgments / 致謝
+
+Inspired by modern AI development practices from:
+- OpenAI
+- Anthropic
+- Google DeepMind
+
+靈感來自現代 AI 開發實踐：
+- OpenAI
+- Anthropic
+- Google DeepMind
+
+---
+
+## 📈 Version History / 版本歷史
+
+### v1.0.0 (2026-02-02) - Production Ready
+- ✅ Complete rule system (22 rules)
+- ✅ 4 AI agents (Planner, Executor, Reviewer, Self-Improvement)
+- ✅ Automated workflows (Feature, BugFix, Refactor)
+- ✅ Git automation and worktrees
+- ✅ Security scanning and auditing
+- ✅ Knowledge graph system
+
+---
+
+**Built with ❤️ using Python and AI**  
+**使用 Python 和 AI 用心打造**

@@ -1,0 +1,113 @@
+# synthforge License
+# synthforge 授權
+
+**Copyright (c) 2026 xx8897**
+
+---
+
+## Dual License / 雙重授權
+
+This project is available under two different licenses:
+
+本專案提供兩種不同的授權方式：
+
+### 1. Open Source License (AGPL-3.0) / 開源授權
+
+For **non-commercial use**, this project is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**.
+
+對於**非商業用途**，本專案採用 **GNU Affero General Public License v3.0 (AGPL-3.0)** 授權。
+
+**You can:**
+- ✅ Use for personal projects / 個人專案使用
+- ✅ Use for educational purposes / 教育用途使用
+- ✅ Modify and distribute / 修改和分發
+- ✅ Use for open-source projects / 開源專案使用
+
+**You must:**
+- ⚠️ Disclose source code / 公開原始碼
+- ⚠️ Include license and copyright / 包含授權和版權聲明
+- ⚠️ State changes / 說明變更
+- ⚠️ Use same license (AGPL-3.0) / 使用相同授權
+
+**Full AGPL-3.0 License**: See [LICENSE-AGPL](LICENSE-AGPL) or https://www.gnu.org/licenses/agpl-3.0.html
+
+---
+
+### 2. Commercial License / 商業授權
+
+For **commercial use**, you must obtain a **Commercial License**.
+
+對於**商業用途**，您必須獲得**商業授權**。
+
+**Commercial use includes / 商業用途包括:**
+- 🏢 Using in a commercial product or service / 在商業產品或服務中使用
+- 💰 Generating revenue from this software / 從此軟體產生收益
+- 🏭 Using in a for-profit organization / 在營利組織中使用
+- 🔒 Not disclosing source code / 不公開原始碼
+
+**To obtain a Commercial License / 獲取商業授權:**
+
+📧 **Email**: zhixiang8897@gmail.com  
+💬 **Subject**: synthforge Commercial License Inquiry  
+📝 **Include**: 
+- Your company name / 公司名稱
+- Intended use case / 預期用途
+- Number of developers / 開發者數量
+
+**Pricing / 定價:**
+- Contact for custom quote / 聯繫獲取客製報價
+- Flexible licensing options available / 提供靈活的授權選項
+
+---
+
+## FAQ / 常見問題
+
+### Q: Can I use this for my startup? / 我可以在我的新創公司使用嗎？
+
+**A**: If your startup is for-profit, you need a Commercial License. If it's a non-profit or open-source project, you can use the AGPL-3.0 license.
+
+**答**: 如果您的新創公司是營利性的，您需要商業授權。如果是非營利或開源專案，可以使用 AGPL-3.0 授權。
+
+### Q: What if I'm not sure which license I need? / 如果我不確定需要哪種授權怎麼辦？
+
+**A**: Contact us at zhixiang8897@gmail.com and we'll help you determine the right license for your use case.
+
+**答**: 請聯繫 zhixiang8897@gmail.com，我們會幫助您確定適合您用途的授權。
+
+### Q: Can I try before buying? / 我可以先試用再購買嗎？
+
+**A**: Yes! You can evaluate the software under the AGPL-3.0 license. Once you decide to use it commercially, contact us for a Commercial License.
+
+**答**: 可以！您可以在 AGPL-3.0 授權下評估軟體。一旦決定商業使用，請聯繫我們獲取商業授權。
+
+### Q: What's the difference between AGPL and MIT? / AGPL 和 MIT 有什麼區別？
+
+**A**: 
+- **MIT**: Very permissive, allows commercial use without restrictions
+- **AGPL**: Requires source code disclosure, even for web services
+- **MIT**: 非常寬鬆，允許無限制的商業使用
+- **AGPL**: 要求公開原始碼，即使是網路服務
+
+---
+
+## Summary / 總結
+
+| Use Case | License Required | Cost |
+|----------|------------------|------|
+| Personal projects | AGPL-3.0 | Free / 免費 |
+| Educational use | AGPL-3.0 | Free / 免費 |
+| Open-source projects | AGPL-3.0 | Free / 免費 |
+| Commercial products | Commercial License | Paid / 付費 |
+| SaaS/Web services (closed-source) | Commercial License | Paid / 付費 |
+
+---
+
+**For licensing inquiries / 授權諮詢:**
+
+📧 Email: zhixiang8897@gmail.com  
+🌐 GitHub: [@xx8897](https://github.com/xx8897)
+
+---
+
+**Last Updated**: 2026-02-02  
+**Version**: 1.0

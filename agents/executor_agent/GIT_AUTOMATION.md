@@ -10,7 +10,7 @@
 
 ### 1. 自動提交 (Auto Commit)
 ```python
-from agents.executor_agent.git_automation import GitAutomation
+from core_lib.git.automation import GitAutomation
 
 git = GitAutomation()
 
@@ -61,7 +61,7 @@ result = git.create_pr(
 
 ### 一鍵提交並推送
 ```python
-from agents.executor_agent.git_automation import auto_commit_and_push
+from core_lib.git.automation import auto_commit_and_push
 
 result = auto_commit_and_push(
     message="feat: Complete feature",
@@ -71,7 +71,7 @@ result = auto_commit_and_push(
 
 ### 創建功能 PR
 ```python
-from agents.executor_agent.git_automation import create_feature_pr
+from core_lib.git.automation import create_feature_pr
 
 result = create_feature_pr(
     feature_name="user authentication",
@@ -147,7 +147,7 @@ pytest agents/executor_agent/tests/test_git_automation.py -v
 
 ### 範例 1: 完整的功能開發流程
 ```python
-from agents.executor_agent.git_automation import GitAutomation
+from core_lib.git.automation import GitAutomation
 
 git = GitAutomation()
 
@@ -174,7 +174,7 @@ if commit_result['success']:
 
 ### 範例 2: 快速提交並推送
 ```python
-from agents.executor_agent.git_automation import auto_commit_and_push
+from core_lib.git.automation import auto_commit_and_push
 
 result = auto_commit_and_push(
     message="docs: Update README",

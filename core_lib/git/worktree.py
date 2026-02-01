@@ -11,7 +11,7 @@ This module provides:
 - Isolation for parallel development
 
 Usage:
-    from agents.executor_agent.git_worktree import GitWorktreeManager
+    from core_lib.git.worktree import GitWorktreeManager
     
     manager = GitWorktreeManager()
     worktree_path = manager.create_worktree('feature/new-feature')

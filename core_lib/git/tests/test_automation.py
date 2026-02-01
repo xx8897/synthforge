@@ -4,7 +4,7 @@ Tests for Git Automation Tools
 
 import pytest
 from pathlib import Path
-from agents.executor_agent.git_automation import (
+from core_lib.git.automation import (
     GitAutomation,
     auto_commit_and_push,
     create_feature_pr

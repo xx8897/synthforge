@@ -24,7 +24,7 @@ import yaml
 
 # Import Git worktree manager
 try:
-    from .git_worktree import GitWorktreeManager
+    from core_lib.git.worktree import GitWorktreeManager
     GIT_WORKTREE_AVAILABLE = True
 except ImportError:
     GIT_WORKTREE_AVAILABLE = False

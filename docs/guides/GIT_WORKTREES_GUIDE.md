@@ -36,7 +36,7 @@
 ### Using synthforge's Git Worktree Manager
 
 ```python
-from agents.executor_agent.git_worktree import GitWorktreeManager
+from core_lib.git.worktree import GitWorktreeManager
 
 # Initialize manager
 manager = GitWorktreeManager()

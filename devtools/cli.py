@@ -16,8 +16,25 @@ Commands:
     help        Show detailed help
 """
 
-import click
+import sys
+import os
 from pathlib import Path
+
+# Fix encoding for Windows console
+if sys.platform == 'win32':
+    # Set UTF-8 encoding for stdout/stderr
+    if sys.stdout.encoding != 'utf-8':
+        sys.stdout.reconfigure(encoding='utf-8')
+    if sys.stderr.encoding != 'utf-8':
+        sys.stderr.reconfigure(encoding='utf-8')
+    # Set environment variable for Python I/O
+    os.environ['PYTHONIOENCODING'] = 'utf-8'
+
+# Add project root to Python path
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
+
+import click
 
 
 @click.group()
@@ -375,7 +392,7 @@ def git_commit(message, all, files):
     Auto-commit changes
     自動提交變更
     """
-    from agents.executor_agent.git_automation import GitAutomation
+    from core_lib.git.automation import GitAutomation
     
     git_auto = GitAutomation()
     result = git_auto.auto_commit(
@@ -401,7 +418,7 @@ def git_push(branch, force):
     Push branch to remote
     推送分支到遠端
     """
-    from agents.executor_agent.git_automation import GitAutomation
+    from core_lib.git.automation import GitAutomation
     
     git_auto = GitAutomation()
     result = git_auto.push_branch(branch=branch or "", force=force)
@@ -424,7 +441,7 @@ def git_pr(title, body, base, draft):
     Create pull request
     創建 Pull Request
     """
-    from agents.executor_agent.git_automation import GitAutomation
+    from core_lib.git.automation import GitAutomation
     
     git_auto = GitAutomation()
     result = git_auto.create_pr(
@@ -476,8 +493,9 @@ Available commands:
                 continue
             
             # Execute command
+            import shlex
             try:
-                cli.main(command.split(), standalone_mode=False)
+                cli.main(shlex.split(command), standalone_mode=False)
             except SystemExit:
                 pass
             except Exception as e:
