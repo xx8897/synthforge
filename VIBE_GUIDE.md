@@ -6,6 +6,7 @@
 
 related_rules:
   - SMART_GIT_RULE
+  - GIT_EXECUTION_RULE
   - GRAPH_RELATIONSHIP_RULE
   - CORE_RULE
 

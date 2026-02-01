@@ -7,6 +7,12 @@
 
 ---
 
+---
+
+related_rules:
+  - GIT_EXECUTION_RULE
+  - GRAPH_RELATIONSHIP_RULE
+
 ## 🎯 Purpose / 目的
 
 Define the standards for automated Git operations, including intelligent commit message suggestion and automatic semantic version tagging.
