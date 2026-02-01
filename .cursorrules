@@ -1,0 +1,167 @@
+# Cursor AI Rules for synthforge
+
+## 🚨 CRITICAL: Read VIBE_GUIDE.md First
+
+Before ANY task, you MUST:
+1. Read [VIBE_GUIDE.md](VIBE_GUIDE.md)
+2. Read [DIRECTORY_README_RULE.md](rules/core/DIRECTORY_README_RULE.md)
+3. If working in subdirectory: Read `[subdirectory]/README.md`
+4. Check `.internal/confirmations/pending/` for pending confirmations
+5. Check `.internal/planning/待辦.md` for current tasks
+
+## 📋 Core Rules (MANDATORY)
+
+### 1. Directory README Rule
+- **ALWAYS** read directory README.md before viewing/using/modifying files
+- **ALWAYS** update README.md after any file changes
+- **ALWAYS** update ARCHITECTURE.md when structure changes
+
+### 2. VIBE_GUIDE Sync Rule
+- Update `docs/architecture/ARCHITECTURE.md` for all structure changes
+- Update `VIBE_GUIDE.md` only for high-level changes (new top-level directories)
+
+### 3. Bilingual Output
+- **ALL** output must be bilingual (English + Traditional Chinese)
+- Format: English first, then Chinese
+- Use `---` separator between languages
+
+### 4. File Naming Convention
+- Rules: `[TOPIC]_RULE.md` (UPPER_CASE)
+- Confirmations: `[topic]_confirmation.md` (lower_case)
+- Analysis: `[topic]_analysis.md` (lower_case)
+- Knowledge: `[descriptive_name].md` (lower_case)
+- Code: `[module_name].py` (lower_case)
+
+### 5. Knowledge Management
+- Store knowledge in `.internal/knowledge/[category]/`
+- Categories: best_practices, patterns, troubleshooting, references, tools, lessons_learned
+- Use template format
+
+### 6. Confirmation Documents
+- Place in `.internal/confirmations/pending/`
+- Use `[topic]_confirmation.md` naming
+- Include options analysis and specific questions
+
+## 🔄 Workflow
+
+### Before Starting Task:
+1. Read VIBE_GUIDE.md
+2. Read relevant rules
+3. Check `.internal/confirmations/pending/` for pending items
+4. Check `.internal/planning/待辦.md` for todos
+
+### During Task:
+1. Follow all core rules
+2. Use bilingual output
+3. Update documentation as you go
+
+### Before Completing Task:
+1. Read all `.internal/` files
+2. Check for pending todos
+3. Create task summary in `.internal/summaries/YYYY-MM/`
+   - Format: `任務總結_YYYY-MM-DD_HHMM.md`
+4. Remind user of pending tasks
+5. Check token usage (warn if > 10K tokens in .internal/)
+
+## 📊 Token Management
+
+### Thresholds:
+- ✅ Good: < 10K tokens
+- ⚠️ Warning: 10K-20K tokens
+- 🚨 Critical: > 20K tokens
+
+### Actions:
+- At warning: Suggest cleanup
+- At critical: Request cleanup approval
+
+### Cleanup Strategy:
+- Archive old summaries to `docs/sessions/`
+- Delete temp files (> 1 week)
+- Move confirmed items to archived/
+
+## 🎯 Special Instructions
+
+### When Creating Files:
+- Use correct naming convention
+- Place in correct directory
+- Update directory README.md
+- Update ARCHITECTURE.md if structure changes
+
+### When Modifying Structure:
+- Update VIBE_GUIDE.md (if high-level)
+- Update ARCHITECTURE.md (always)
+- Update all affected README.md files
+
+### When Storing Knowledge:
+- Determine category
+- Use knowledge template
+- Update `.internal/knowledge/README.md`
+
+### When Seeking Confirmation:
+- Create in `.internal/confirmations/pending/`
+- Include options analysis
+- List specific questions with ⏳ markers
+
+## 📝 Output Format
+
+### Standard Response:
+```markdown
+[English content]
+
+---
+
+[Traditional Chinese content]
+```
+
+### Task Summary:
+```markdown
+# 任務總結 - YYYY-MM-DD HH:MM
+
+## ✅ 已完成的任務
+[List completed tasks]
+
+## 📋 創建/修改的文件
+[List files]
+
+## 🎯 關鍵決策
+[List decisions]
+
+## 📝 未完成的待辦事項提醒
+[Remind pending tasks from .internal/]
+
+## ⚠️ .internal/ Token 消耗狀態
+[Report token usage]
+```
+
+## 🚀 Quick Commands
+
+- New rule: Create in `rules/[category]/[TOPIC]_RULE.md`
+- New knowledge: Create in `.internal/knowledge/[category]/[name].md`
+- New confirmation: Create in `.internal/confirmations/pending/[topic]_confirmation.md`
+- Task summary: Create in `.internal/summaries/YYYY-MM/任務總結_YYYY-MM-DD_HHMM.md`
+
+## ⚠️ Never Do
+
+- ❌ Skip reading VIBE_GUIDE.md
+- ❌ Skip reading directory README.md
+- ❌ Forget to update README.md after changes
+- ❌ Use wrong file naming convention
+- ❌ Output in single language only
+- ❌ Complete task without creating summary
+- ❌ Ignore pending confirmations
+
+## ✅ Always Do
+
+- ✅ Read VIBE_GUIDE.md first
+- ✅ Read directory README.md before entering
+- ✅ Update README.md after changes
+- ✅ Use bilingual output
+- ✅ Follow naming conventions
+- ✅ Create task summary
+- ✅ Check and remind pending tasks
+- ✅ Monitor token usage
+
+---
+
+**This file ensures consistent AI behavior across all Cursor sessions.**
+**此檔案確保所有 Cursor 會話中 AI 行為的一致性。**

@@ -1,0 +1,143 @@
+# AI Workspace Global Filters
+# 全域過濾規則 - 發布時自動排除這些檔案/資料夾
+
+# ========================================
+# AI Tools & Vibe Coding Artifacts
+# AI 工具產生的雜訊
+# ========================================
+ai_tools:
+  - .cursor/
+  - .continue/
+  - .aider/
+  - .ai/
+  - .gemini/
+  - copilot_*/
+  - agent_logs/
+  - ai_debug/
+  - ai_memory/
+  - .windsurf/
+  - .codeium/
+
+# ========================================
+# Development Environments
+# 開發環境設定
+# ========================================
+ide_configs:
+  - .vscode/
+  - .idea/
+  - .fleet/
+  - *.sublime-*
+  - .vs/
+
+# ========================================
+# Virtual Environments & Dependencies
+# 虛擬環境與依賴（體積大且不可移植）
+# ========================================
+environments:
+  - .venv/
+  - venv/
+  - env/
+  - node_modules/
+  - vendor/
+  - .pnpm-store/
+
+# ========================================
+# Build Artifacts & Cache
+# 編譯產物與快取
+# ========================================
+build_cache:
+  - __pycache__/
+  - .pytest_cache/
+  - .mypy_cache/
+  - .ruff_cache/
+  - .coverage
+  - htmlcov/
+  - dist/
+  - build/
+  - "*.egg-info/"
+  - .next/
+  - .nuxt/
+  - out/
+  - target/  # Rust
+  - bin/     # Go (如果是編譯產物)
+  - obj/     # C#
+
+# ========================================
+# Temporary & Log Files
+# 暫存與日誌檔案
+# ========================================
+temp_files:
+  - "*.pyc"
+  - "*.pyo"
+  - "*.pyd"
+  - "*.log"
+  - "*.tmp"
+  - "*.temp"
+  - "*.bak"
+  - "*~"
+  - .DS_Store
+  - Thumbs.db
+  - desktop.ini
+  - tmp/
+  - temp/
+  - logs/
+
+# ========================================
+# Sensitive & Secret Files
+# 敏感檔案（最高優先級）
+# ========================================
+secrets:
+  - .env
+  - .env.local
+  - .env.*.local
+  - "*.key"
+  - "*.pem"
+  - "*.p12"
+  - secrets/
+  - credentials/
+  - .aws/
+  - .ssh/
+
+# ========================================
+# Personal Notes & Drafts
+# 個人筆記與草稿
+# ========================================
+personal:
+  - TODO.md
+  - NOTES.md
+  - notes/
+  - scratch/
+  - experiments/
+  - playground/
+  - drafts/
+  - "*.draft.*"
+
+# ========================================
+# Version Control
+# 版本控制系統（Git 本身不需要被複製）
+# ========================================
+vcs:
+  - .git/
+  - .gitignore  # 注意：這個可能需要保留，視情況
+  - .gitattributes
+
+# ========================================
+# Large Binary Files (需要確認)
+# 大型二進位檔案（會觸發警告，由使用者決定）
+# ========================================
+large_files_warning:
+  - "*.onnx"
+  - "*.pt"
+  - "*.pth"
+  - "*.h5"
+  - "*.pb"
+  - "*.bin"
+  - "*.safetensors"
+  - "*.ckpt"
+  # 注意：這些不會自動過濾，只會警告
+
+# ========================================
+# Custom Exclusions (使用者自訂)
+# 您可以在專案內的 .releaseignore 覆寫
+# ========================================
+# 專案級別的 .releaseignore 會與此合併

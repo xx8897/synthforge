@@ -1,0 +1,20 @@
+agent:
+  name: executor_agent
+  version: 1.0.0
+  role: Code Execution with TDD
+  
+settings:
+  tdd_mode: true
+  test_first: true
+  coverage_threshold: 80
+  auto_refactor: true
+  
+git:
+  use_worktrees: true
+  auto_commit: true
+  commit_message_template: "feat: {task_description}"
+  
+coding_style:
+  follow_rules: true
+  auto_format: true
+  run_linter: true

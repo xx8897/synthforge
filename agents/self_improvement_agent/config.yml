@@ -1,0 +1,23 @@
+# Self-Improvement Agent Configuration
+
+# Learning settings
+learning:
+  enabled: true
+  auto_optimize: false  # Set to true for automatic optimization
+  min_samples: 5  # Minimum samples before suggesting improvements
+  
+# Performance monitoring
+monitoring:
+  enabled: true
+  alert_threshold:
+    execution_time_increase: 1.5  # Alert if 50% slower
+    success_rate_min: 0.8  # Alert if below 80%
+  
+# Optimization settings
+optimization:
+  auto_apply: false  # Require manual approval
+  backup_before_optimize: true
+  types:
+    - performance
+    - reliability
+    - error_prevention

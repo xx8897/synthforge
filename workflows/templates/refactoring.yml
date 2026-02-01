@@ -1,0 +1,86 @@
+# Refactoring Workflow
+# 重構工作流
+
+name: Refactoring
+description: Automate code refactoring with safety checks
+version: 1.0.0
+author: synthforge team
+tags: [refactoring, code-quality, automation]
+
+# Workflow configuration
+config:
+  timeout: 5400  # 1.5 hours
+  retry: 1
+  continue_on_error: false
+
+# Workflow phases (sequential execution)
+phases:
+  # Phase 1: Analyze code
+  analyze:
+    - skill: code_analyzer
+      description: Analyze code for refactoring opportunities
+      action: analyze_code
+      config:
+        detect_code_smells: true
+        identify_duplications: true
+        check_complexity: true
+        
+    - agent: planner_agent
+      description: Prioritize refactoring opportunities
+      action: prioritize_refactorings
+      config:
+        consider_impact: true
+        consider_effort: true
+
+  # Phase 2: Plan refactoring
+  plan:
+    - agent: planner_agent
+      description: Create detailed refactoring plan
+      action: create_refactoring_plan
+      config:
+        ensure_backward_compatibility: true
+        plan_incremental_steps: true
+        identify_risks: true
+
+  # Phase 3: Execute refactoring
+  refactor:
+    - agent: executor_agent
+      description: Execute refactoring incrementally
+      action: execute_refactoring
+      mode: incremental
+      config:
+        preserve_behavior: true
+        run_tests_after_each_step: true
+        use_git_worktree: true
+
+  # Phase 4: Verify no regressions
+  verify:
+    - skill: test_runner
+      description: Run full test suite
+      action: run_all_tests
+      config:
+        coverage_threshold: 80
+        fail_on_regression: true
+        
+    - agent: reviewer_agent
+      description: Review refactored code
+      action: review_refactoring
+      config:
+        check_code_quality: true
+        verify_no_behavior_change: true
+        check_performance: true
+
+# Expected outputs
+outputs:
+  - analysis report
+  - refactoring plan
+  - refactored code
+  - test results
+  - review report
+
+# Success criteria
+success_criteria:
+  - all_tests_pass: true
+  - no_regressions: true
+  - code_quality_improved: true
+  - review_approved: true

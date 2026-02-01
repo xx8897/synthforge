@@ -1,0 +1,37 @@
+# Simple Feature Example
+# 簡單功能範例
+
+name: Simple Feature Example
+description: A minimal example workflow for learning
+version: 1.0.0
+tags: [example, simple, learning]
+
+# Minimal configuration
+config:
+  timeout: 1800  # 30 minutes
+
+# Simple two-phase workflow
+phases:
+  # Phase 1: Parse specification
+  parse:
+    - skill: spec_parser
+      description: Parse implementation plan
+      input: implementation_plan.md
+      output: spec.json
+
+  # Phase 2: Generate tasks
+  generate:
+    - skill: task_generator
+      description: Generate task list
+      input: spec.json
+      output: task.md
+
+# Expected outputs
+outputs:
+  - spec.json
+  - task.md
+
+# Success criteria
+success_criteria:
+  - spec_parsed: true
+  - tasks_generated: true

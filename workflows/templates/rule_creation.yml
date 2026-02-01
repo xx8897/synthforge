@@ -1,0 +1,74 @@
+# Rule Creation Workflow
+# 規則創建工作流
+
+name: Rule Creation
+description: Automate rule creation process from research to integration
+version: 1.0.0
+author: synthforge team
+tags: [rules, documentation, automation]
+
+# Workflow configuration
+config:
+  timeout: 3600  # 1 hour
+  retry: 1
+  continue_on_error: false
+
+# Workflow phases (sequential execution)
+phases:
+  # Phase 1: Research requirements
+  research:
+    - agent: research_agent
+      description: Gather requirements and best practices
+      action: research_rule_requirements
+      config:
+        check_existing_rules: true
+        identify_gaps: true
+        gather_examples: true
+
+  # Phase 2: Draft rule
+  draft:
+    - agent: writer_agent
+      description: Create rule draft
+      action: create_rule_draft
+      config:
+        follow_template: true
+        include_examples: true
+        add_related_rules: true
+        bilingual: true  # Chinese + English
+
+  # Phase 3: Review and refine
+  review:
+    - agent: reviewer_agent
+      description: Review rule for completeness
+      action: review_rule
+      config:
+        check_completeness: true
+        check_clarity: true
+        check_consistency: true
+        verify_examples: true
+
+  # Phase 4: Integrate into system
+  integrate:
+    - skill: rule_integrator
+      description: Add rule to rules system
+      action: integrate_rule
+      config:
+        update_rules_readme: true
+        add_to_index: true
+        update_related_rules: true
+        validate_links: true
+
+# Expected outputs
+outputs:
+  - research notes
+  - rule draft
+  - review feedback
+  - final rule
+  - updated rules/README.md
+
+# Success criteria
+success_criteria:
+  - rule_complete: true
+  - examples_included: true
+  - related_rules_linked: true
+  - integrated_successfully: true

@@ -1,0 +1,142 @@
+# AI Issue Triage Workflow
+# AI Issue 分類工作流
+#
+# 功能說明 (Features):
+# - 當 Issue 被創建或重新開啟時自動觸發
+# - 自動分析 Issue 類型（bug、feature、documentation 等）
+# - 自動添加適當的標籤和優先級
+# - 提供建議的處理步驟和相關工作流
+#
+# 使用場景 (Use Cases):
+# - 自動化 Issue 管理
+# - 快速分類和優先級排序
+# - 為開發者提供處理建議
+#
+# 相關文檔 (Related Docs):
+# - workflows/templates/ (相關工作流模板)
+# - docs/guides/WORKFLOW_GUIDE.md
+
+name: AI Issue Triage
+
+on:
+  issues:
+    types: [opened, reopened] # Issue 開啟或重新開啟時觸發
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      issues: write # 寫入 Issue 權限（添加標籤和評論）
+    
+    steps:
+      - name: Checkout code # 檢出代碼
+        uses: actions/checkout@v4
+      
+      - name: Set up Python # 設置 Python 環境
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies # 安裝依賴
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml click
+      
+      - name: Analyze Issue # 分析 Issue
+        id: analyze
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const title = issue.title.toLowerCase();
+            const body = issue.body || '';
+            
+            // 判斷 Issue 類型
+            let labels = [];
+            let priority = 'medium';
+            
+            // Bug 檢測
+            if (title.includes('bug') || title.includes('error') || title.includes('fix')) {
+              labels.push('bug');
+              priority = 'high';
+            }
+            
+            // 功能請求檢測
+            if (title.includes('feature') || title.includes('add') || title.includes('implement')) {
+              labels.push('enhancement');
+            }
+            
+            // 文檔相關
+            if (title.includes('doc') || title.includes('readme')) {
+              labels.push('documentation');
+              priority = 'low';
+            }
+            
+            // Workflow 相關
+            if (title.includes('workflow') || body.includes('workflow')) {
+              labels.push('workflow');
+            }
+            
+            // Agent 相關
+            if (title.includes('agent') || body.includes('agent')) {
+              labels.push('agent');
+            }
+            
+            // Skill 相關
+            if (title.includes('skill') || body.includes('skill')) {
+              labels.push('skill');
+            }
+            
+            // 優先級標籤
+            if (title.includes('urgent') || title.includes('critical')) {
+              priority = 'critical';
+            }
+            
+            labels.push(`priority: ${priority}`);
+            
+            // 添加標籤
+            if (labels.length > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: labels
+              });
+            }
+            
+            // 創建分類評論
+            const comment = `## 🤖 AI Issue Triage
+            
+            **Detected Type**: ${labels.filter(l => !l.startsWith('priority:')).join(', ') || 'general'}
+            **Priority**: ${priority}
+            
+            ### Suggested Actions:
+            ${priority === 'critical' ? '- ⚠️ **Immediate attention required**' : ''}
+            ${labels.includes('bug') ? '- 🐛 Reproduce the bug\\n- 🔍 Investigate root cause\\n- 🛠️ Create fix plan' : ''}
+            ${labels.includes('enhancement') ? '- 📋 Review feature requirements\\n- 🎯 Create implementation plan\\n- 📝 Update documentation' : ''}
+            ${labels.includes('documentation') ? '- 📚 Review documentation\\n- ✍️ Update relevant docs\\n- ✅ Verify accuracy' : ''}
+            
+            ### Related Workflows:
+            ${labels.includes('bug') ? '- Use \\`workflows/templates/bug_fix.yml\\`' : ''}
+            ${labels.includes('enhancement') ? '- Use \\`workflows/templates/feature_development.yml\\`' : ''}
+            
+            ---
+            *Automated triage by synthforge AI*`;
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body: comment
+            });
+            
+            return { labels, priority };
+      
+      - name: Assign to Project # 分配到項目（針對緊急 Issue）
+        uses: actions/github-script@v7
+        if: steps.analyze.outputs.priority == 'critical'
+        with:
+          script: |
+            // 對於緊急 Issue，可以分配到項目看板
+            console.log('Critical issue detected - consider immediate assignment');

@@ -1,0 +1,92 @@
+# Feature Development Workflow
+# 功能開發工作流
+
+name: Feature Development
+description: Automate feature development from specification to code review
+version: 1.0.0
+author: synthforge team
+tags: [development, feature, automation]
+
+# Workflow configuration
+config:
+  timeout: 7200  # 2 hours
+  retry: 2
+  continue_on_error: false
+
+# Workflow phases (sequential execution)
+phases:
+  # Phase 1: Parse specification
+  specify:
+    - skill: spec_parser
+      description: Parse implementation_plan.md into structured format
+      input: implementation_plan.md
+      output: spec.json
+      config:
+        validate_spec: true
+        extract_requirements: true
+
+  # Phase 2: Generate tasks
+  plan:
+    - skill: task_generator
+      description: Generate task.md from parsed specification
+      input: spec.json
+      output: task.md
+      config:
+        analyze_dependencies: true
+        prioritize_tasks: true
+        
+    - agent: planner_agent
+      description: Validate and optimize task plan
+      action: validate_tasks
+      input: task.md
+      config:
+        check_dependencies: true
+        estimate_effort: true
+
+  # Phase 3: Execute implementation
+  execute:
+    - agent: executor_agent
+      description: Implement tasks using TDD approach
+      action: implement_tasks
+      mode: TDD
+      input: task.md
+      config:
+        test_first: true
+        coverage_threshold: 80
+        follow_coding_style: true
+        tools: [git_worktree, tmux]
+
+  # Phase 4: Run tests
+  test:
+    - skill: test_runner
+      description: Run all automated tests
+      action: run_all_tests
+      config:
+        coverage_threshold: 80
+        fail_on_low_coverage: true
+        generate_report: true
+
+  # Phase 5: Code review
+  review:
+    - agent: reviewer_agent
+      description: AI-powered code review
+      action: code_review
+      config:
+        checks: [style, security, performance, maintainability]
+        rules_path: ./rules/
+        auto_fix_minor: false
+        generate_report: true
+
+# Expected outputs
+outputs:
+  - task.md
+  - implemented code
+  - test results
+  - review report
+
+# Success criteria
+success_criteria:
+  - all_tests_pass: true
+  - coverage_above_threshold: true
+  - review_approved: true
+  - no_critical_issues: true

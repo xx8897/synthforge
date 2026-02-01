@@ -1,0 +1,80 @@
+# Bug Fix Workflow
+# Bug 修復工作流
+
+name: Bug Fix
+description: Automate bug fixing from diagnosis to verification
+version: 1.0.0
+author: synthforge team
+tags: [bugfix, debugging, automation]
+
+# Workflow configuration
+config:
+  timeout: 3600  # 1 hour
+  retry: 2
+  continue_on_error: false
+
+# Workflow phases (sequential execution)
+phases:
+  # Phase 1: Diagnose issue
+  diagnose:
+    - agent: diagnostic_agent
+      description: Analyze issue and identify root cause
+      action: analyze_issue
+      input: issue.md
+      config:
+        check_logs: true
+        reproduce_bug: true
+        identify_root_cause: true
+
+  # Phase 2: Plan fix
+  plan:
+    - agent: planner_agent
+      description: Create fix plan
+      action: create_fix_plan
+      config:
+        minimal_changes: true
+        consider_side_effects: true
+        estimate_impact: true
+
+  # Phase 3: Implement fix
+  fix:
+    - agent: executor_agent
+      description: Implement bug fix with tests
+      action: implement_fix
+      mode: TDD
+      config:
+        test_first: true
+        add_regression_test: true
+        follow_coding_style: true
+
+  # Phase 4: Verify fix
+  verify:
+    - skill: test_runner
+      description: Run tests to verify fix
+      action: run_tests
+      config:
+        run_regression_tests: true
+        coverage_threshold: 80
+        
+    - agent: reviewer_agent
+      description: Review fix for quality
+      action: review_fix
+      config:
+        check_side_effects: true
+        verify_minimal_changes: true
+
+# Expected outputs
+outputs:
+  - diagnosis report
+  - fix plan
+  - implemented fix
+  - test results
+  - review report
+
+# Success criteria
+success_criteria:
+  - bug_reproduced: true
+  - fix_implemented: true
+  - all_tests_pass: true
+  - no_regressions: true
+  - review_approved: true

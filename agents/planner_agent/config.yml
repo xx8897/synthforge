@@ -1,0 +1,17 @@
+agent:
+  name: planner_agent
+  version: 1.0.0
+  role: Task Planning and Validation
+  
+settings:
+  max_task_depth: 5
+  dependency_check: true
+  effort_estimation: true
+  
+thresholds:
+  max_complexity: 10
+  max_dependencies: 5
+  
+estimation:
+  complexity_multiplier: 0.5  # hours per complexity point
+  base_hours: 0.5
