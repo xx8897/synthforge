@@ -1,8 +1,8 @@
 # synthforge Architecture
 
-**Version**: 3.0  
+**Version**: 4.0  
 **Last Updated**: 2026-02-02  
-**Status**: v1.0.0 Production Ready
+**Status**: v1.1.0 (Task Management Integrated)
 
 ---
 
@@ -36,6 +36,7 @@ synthforge/
 ├── 📄 Core Files / 核心檔案
 │   ├── README.md                    ← Project overview
 │   ├── VIBE_GUIDE.md                ← AI agent entry point
+│   ├── task.md                      ← Active task tracking (Mission Control)
 │   ├── .cursorrules                 ← Cursor AI configuration
 │   └── .github/
 │       └── workflows/               ← GitHub Actions (PR review, Issue triage)
@@ -147,6 +148,15 @@ synthforge/
 **Output**:
 - **Mermaid Diagrams**: Visual map of dependencies.
 - **Knowledge Map**: Automated cross-referencing of rules and patterns.
+
+### 6. Task Management (`task.md`)
+**Purpose**: Real-time progress tracking and agent coordination.  
+**用途**: 即時進度追蹤和代理協調。
+
+**Features**:
+- **Smart Integration**: Fed into `SummarySkill` for intelligent commit messages.
+- **Visual Status**: Clear `[ ]`, `[/]`, `[x]` markers for human/AI collaboration.
+- **Single Source of Truth**: The definitive place to know what is being worked on right now.
 
 ---
 

@@ -5,11 +5,16 @@
 **目的**: 這是 AI 代理進入 synthforge 工作區時應該首先閱讀的檔案。
 
 related_rules:
+  - TASK_MANAGEMENT_RULE
   - SMART_GIT_RULE
   - GIT_EXECUTION_RULE
   - GRAPH_RELATIONSHIP_RULE
   - CORE_RULE
 
+## 🚀 Mission Control / 任務控制中心
+The file [task.md](file:///c:/Users/xx8897/synthforge/task.md) is the **Mission Control** of this project. 
+- **AI Rule**: ALWAYS check `task.md` first to understand the current priority.
+- **AI Rule**: ALWAYS update `task.md` when progress is made.
 
 ---
 
