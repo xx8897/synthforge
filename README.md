@@ -157,6 +157,9 @@ git worktree remove .worktrees/feature_user-auth
 git branch -d feature/user-auth
 ```
 
+> **💡 Pro Tip**: The `-a` parameter automatically stages all modified files, so you don't need `git add`!  
+> **💡 專業提示**: `-a` 參數會自動暫存所有已修改的文件，所以您不需要 `git add`！
+
 ### Manual Git Operations / 手動 Git 操作
 
 If you prefer manual control:
