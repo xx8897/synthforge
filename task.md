@@ -1,0 +1,23 @@
+# Task: Smart Git Automation & Tagging
+
+- [ ] Define Smart Git Rules (`rules/development/SMART_GIT_RULE.md`) [/]
+- [ ] Implement `SmartGitHandler` (`core_lib/git/smart_handler.py`) [ ]
+    - [ ] Version increment logic (Generic SemVer)
+    - [ ] Change analysis logic (Commit message suggestion)
+    - [ ] Auto-commit orchestrator
+- [ ] Integrate into CLI (`devtools/cli.py`) [ ]
+    - [ ] `git tag --auto` command
+    - [ ] `git smart-commit` command
+- [ ] Verification & Testing [ ]
+    - [ ] Create `core_lib/git/tests/test_smart_handler.py`
+    - [ ] Verify versioning logic
+    - [ ] Verify message suggestion logic
+- [ ] Documentation Update [x]
+    - [x] Update `docs/guides/GIT_WORKFLOW.md` with smart features
+    - [x] Update `README.md`
+- [x] Summary-Aware Git & Graph Visualization [x]
+    - [x] Create `skills/automation/summary_skill.py` [x]
+    - [x] Create `rules/management/GRAPH_RELATIONSHIP_RULE.md` [x]
+    - [x] Enhance `SmartGitHandler` with Summary Skill [x]
+    - [x] Integrate `graph` command into `cli.py` [x]
+    - [x] Generate initial Knowledge Map [x]

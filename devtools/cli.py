@@ -403,7 +403,7 @@ def git_commit(message, all, files, smart):
         analysis = smart_handler.analyze_changes()
         click.echo(click.style(f"🤖 Smart Analysis: {analysis['reason']}", fg='cyan'))
         if not message:
-            message = f"{analysis['suggestion']}: update files"
+            message = analysis['message']
             click.echo(f"Suggested message: {click.style(message, fg='yellow')}")
     
     if not message:
@@ -504,6 +504,51 @@ def git_pr(title, body, base, draft):
         click.echo(click.style(f"❌ PR creation failed", fg='red'))
         for error in result['errors']:
             click.echo(f"  {error}")
+
+
+# Knowledge Graph Commands
+@cli.group()
+def graph():
+    """
+    Knowledge graph visualization
+    知識圖譜視覺化
+    """
+    pass
+
+
+@graph.command('build')
+def graph_build():
+    """
+    Build/Update knowledge map
+    構建/更新知識地圖
+    """
+    from devtools.knowledge_graph import generate_knowledge_map
+    
+    success = generate_knowledge_map()
+    if success:
+        click.echo(click.style("✅ Knowledge map updated: .internal/knowledge/knowledge_map.md", fg='green'))
+    else:
+        click.echo(click.style("❌ Failed to update knowledge map", fg='red'))
+
+
+@graph.command('show')
+def graph_show():
+    """
+    Show knowledge statistics
+    顯示知識統計信息
+    """
+    from devtools.knowledge_graph import analyze_knowledge_relationships
+    
+    results = analyze_knowledge_relationships()
+    click.echo(click.style("\n📊 Knowledge Statistics", fg='cyan', bold=True))
+    click.echo(f"Rules: {results['rules']['stats']['total_nodes']}")
+    click.echo(f"Knowledge: {results['knowledge']['stats']['total_nodes']}")
+    click.echo(f"Total Edges: {results['combined_stats']['total_edges']}")
+    
+    if results['rules']['stats']['most_connected']:
+        click.echo(click.style("\n🔗 Most Connected Rules:", fg='yellow'))
+        for node in results['rules']['stats']['most_connected']:
+            click.echo(f"  - {node['name']} ({node['connections']} connections)")
 
 
 # Interactive Mode

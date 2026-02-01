@@ -19,30 +19,54 @@ class SmartGitHandler:
     def __init__(self, repo_path: str = "."):
         self.repo_path = Path(repo_path).resolve()
         self.automation = GitAutomation(repo_path)
+        try:
+            from skills.automation.summary_skill import SummarySkill
+            self.summary_skill = SummarySkill(repo_path)
+        except ImportError:
+            self.summary_skill = None
         
     def analyze_changes(self) -> Dict[str, Any]:
         """
-        Analyze staged changes and suggest a commit type.
-        分析暫存的變更並建議提交類型。
+        Analyze staged changes and suggest a commit type and message.
+        分析暫存的變更並建議提交類型和訊息。
         """
         staged_files = self._get_staged_files()
         if not staged_files:
-            return {'suggestion': 'chore', 'reason': 'No changes found'}
+            return {'suggestion': 'chore', 'reason': 'No changes found', 'message': ''}
             
         extensions = {Path(f).suffix for f in staged_files}
         paths = {str(Path(f).parent) for f in staged_files}
         
+        suggestion = 'chore'
+        reason = 'General maintenance'
+        
         # Simple heuristic analysis
         if all(f.endswith('.md') for f in staged_files):
-            return {'suggestion': 'docs', 'reason': 'Only documentation files changed'}
+            suggestion = 'docs'
+            reason = 'Only documentation files changed'
+        elif any('tests' in p for p in paths):
+            suggestion = 'test'
+            reason = 'Test files involved'
+        elif any(p.startswith('core_lib') or p.startswith('agents') for p in paths):
+            suggestion = 'feat'
+            reason = 'Core implementation change'
             
-        if any('tests' in p for p in paths):
-            return {'suggestion': 'test', 'reason': 'Test files involved'}
-            
-        if any(p.startswith('core_lib') or p.startswith('agents') for p in paths):
-            return {'suggestion': 'feat', 'reason': 'Core implementation change'}
-            
-        return {'suggestion': 'chore', 'reason': 'General maintenance'}
+        # Contextual improvement using SummarySkill
+        context_msg = ""
+        if self.summary_skill:
+            completed_task = self.summary_skill.get_latest_completed_task()
+            if completed_task:
+                # Use task name if it seems relevant (simple check)
+                context_msg = completed_task.lower()
+                reason += f" (Based on task: {completed_task})"
+        
+        final_message = f"{suggestion}: {context_msg}" if context_msg else f"{suggestion}: update files"
+        
+        return {
+            'suggestion': suggestion,
+            'reason': reason,
+            'message': final_message
+        }
 
     def suggest_next_tag(self) -> str:
         """

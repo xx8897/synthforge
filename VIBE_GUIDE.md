@@ -4,6 +4,12 @@
 **Purpose**: This is the FIRST file AI agents should read when entering the synthforge workspace.  
 **目的**: 這是 AI 代理進入 synthforge 工作區時應該首先閱讀的檔案。
 
+related_rules:
+  - SMART_GIT_RULE
+  - GRAPH_RELATIONSHIP_RULE
+  - CORE_RULE
+
+
 ---
 
 ## 📖 Terminology / 術語
