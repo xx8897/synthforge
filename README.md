@@ -5,7 +5,7 @@
 > **給 AI 代理**: 請先閱讀 [VIBE_GUIDE.md](VIBE_GUIDE.md)。
 
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/xx8897/synthforge)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-Dual--License-green.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/status-Production%20Ready-success.svg)](docs/architecture/ROADMAP.md)
 
 ---
@@ -80,7 +80,7 @@ python devtools/cli.py check --all
 synthforge/
 ├── 📄 README.md                 ← You are here / 你在這裡
 ├── 📄 VIBE_GUIDE.md             ← AI agent entry point / AI 代理入口
-├── 📄 LICENSE                   ← MIT License
+├── 📄 LICENSE                   ← Dual License (AGPL-3.0 + Commercial)
 │
 ├── 📁 rules/                    ← 22 governance rules / 22 條治理規則
 │   ├── core/                    ← Mandatory rules / 強制規則
@@ -265,9 +265,9 @@ This is a personal project, but contributions are welcome!
 
 ## 📄 License / 授權
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under a Dual License (AGPL-3.0 + Commercial) - see the [LICENSE](LICENSE) file for details.
 
-本專案採用 MIT 授權 - 詳見 [LICENSE](LICENSE) 文件。
+本專案採用雙重授權 (AGPL-3.0 + 商業授權) - 詳見 [LICENSE](LICENSE) 文件。
 
 **What this means / 這意味著什麼**:
 - ✅ You can use this commercially / 可商業使用
