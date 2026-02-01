@@ -119,6 +119,42 @@ python devtools/cli.py git commit -m "fix: update logic" -a
 
 ---
 
+## 🤖 Smart Git Operations / 智慧 Git 操作 ⭐ New!
+
+synthforge now includes intelligent Git analysis to automate your workflow. / synthforge 現在包含智慧 Git 分析以自動化您的工作流程。
+
+### Smart Commit / 智慧提交
+
+Automatically analyze your changes and suggest the correct commit type (feat, fix, docs, etc.). / 自動分析您的變更並建議正確的提交類型。
+
+```bash
+# Analyze and commit (with auto-staging)
+# 分析並提交（包含自動暫存）
+python devtools/cli.py git commit -s -a
+```
+
+**What it does / 它的作用**:
+- 🔍 **Analyzes files**: Detects if you changed core logic, tests, or docs.
+- 💡 **Suggests type**: Prepends `feat:`, `fix:`, `docs:`, etc. automatically.
+- 🚀 **One-command**: Stages, generates message, and commits.
+
+### Smart Tagging / 智慧標籤
+
+Automatically calculate and apply the next version tag (SemVer) based on your commit history. / 根據您的提交歷史自動計算並應用下一個版本標籤（SemVer）。
+
+```bash
+# Automatically determine and apply next tag (v1.0.1, v1.1.0, etc.)
+# 自動確定並應用下一個標籤
+python devtools/cli.py git tag --auto
+```
+
+**Rules / 規則**:
+- 🆕 **Minor (0.x.0)**: Automatic if new `feat:` commits are found.
+- 🐞 **Patch (0.0.x)**: Automatic for `fix:`, `docs:`, or `chore:` commits.
+- ⚠️ **Major (x.0.0)**: Triggered if `BREAKING CHANGE` or `BC:` is found in commit messages.
+
+---
+
 ## 🌳 What are Git Worktrees? / 什麼是 Git Worktrees？
 
 **Git Worktrees** allow you to have multiple working directories from the same repository simultaneously.

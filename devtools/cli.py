@@ -384,17 +384,32 @@ def git():
 
 
 @git.command('commit')
-@click.option('--message', '-m', required=True, help='Commit message')
+@click.option('--message', '-m', help='Commit message (optional if using smart)')
 @click.option('--all', '-a', is_flag=True, help='Add all changed files')
 @click.option('--files', '-f', multiple=True, help='Specific files to commit')
-def git_commit(message, all, files):
+@click.option('--smart', '-s', is_flag=True, help='Analyze changes and suggest commit type')
+def git_commit(message, all, files, smart):
     """
     Auto-commit changes
     自動提交變更
     """
     from core_lib.git.automation import GitAutomation
+    from core_lib.git.smart_handler import SmartGitHandler
     
     git_auto = GitAutomation()
+    smart_handler = SmartGitHandler()
+    
+    if smart:
+        analysis = smart_handler.analyze_changes()
+        click.echo(click.style(f"🤖 Smart Analysis: {analysis['reason']}", fg='cyan'))
+        if not message:
+            message = f"{analysis['suggestion']}: update files"
+            click.echo(f"Suggested message: {click.style(message, fg='yellow')}")
+    
+    if not message:
+        click.echo(click.style("❌ Commit message required (use -m or -s)", fg='red'))
+        return
+
     result = git_auto.auto_commit(
         files=list(files) if files else None,
         message=message,
@@ -431,6 +446,37 @@ def git_push(branch, force):
             click.echo(f"  {error}")
 
 
+@git.command('tag')
+@click.option('--name', '-n', help='Tag name (e.g., v1.0.0)')
+@click.option('--message', '-m', help='Tag message')
+@click.option('--auto', '-a', is_flag=True, help='Automatically determine next version')
+def git_tag(name, message, auto):
+    """
+    Manage Git tags
+    管理 Git 標籤
+    """
+    from core_lib.git.smart_handler import SmartGitHandler
+    
+    handler = SmartGitHandler()
+    
+    if auto:
+        next_tag = handler.suggest_next_tag()
+        click.echo(click.style(f"🤖 Suggested next tag: {next_tag}", fg='cyan'))
+        result = handler.apply_smart_tag(message=message)
+        if result['success']:
+            click.echo(click.style(f"✅ Applied tag: {result['tag']}", fg='green'))
+        else:
+            click.echo(click.style(f"❌ Tagging failed: {result['error']}", fg='red'))
+    elif name:
+        import subprocess
+        try:
+            cmd = ['git', 'tag', '-a', name, '-m', message or f"Release {name}"]
+            subprocess.run(cmd, check=True)
+            click.echo(click.style(f"✅ Applied tag: {name}", fg='green'))
+        except Exception as e:
+            click.echo(click.style(f"❌ Tagging failed: {str(e)}", fg='red'))
+    else:
+        click.echo(click.style("❌ Tag name required or use --auto", fg='red'))
 @git.command('pr')
 @click.option('--title', '-t', required=True, help='PR title')
 @click.option('--body', '-b', help='PR description')
