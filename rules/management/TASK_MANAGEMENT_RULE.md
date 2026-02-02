@@ -32,21 +32,36 @@ Organize tasks by logical phases (e.g., Planning, Execution, Verification). Each
 
 ---
 
-## 🔄 Lifecycle & AI Interaction / 生命週期與 AI 互動
+## 🔄 Lifecycle & Reset Protocol / 生命週期與重置協議
 
-### 1. Initialization / 初始化
-Before starting any significant work, the **Planner Agent** (or the AI) MUST generate a task breakdown in `task.md`.
+### 1. Distinction Strategy / 區分策略
+- **Combat Zone (`task.md`)**:
+    - **Scope**: Immediate, tactical objectives (1-2 days max).
+    - **Content**: Detailed operational steps.
+    - **Focus**: "What am I executing *right now*?"
+- **War Room (`.internal/planning/TODO_*.md`)**:
+    - **Scope**: Long-term, strategic roadmap.
+    - **Content**: High-level features and milestones.
+    - **Focus**: "What is the *next* battle?"
 
-### 2. Real-time Updates / 即時更新
-As the **Executor Agent** works:
-1.  **Start**: Mark task as `[/]`.
-2.  **Finish**: Mark task as `[x]`.
-3.  **Cross-Reference**: Use the completed task name in Git commit messages (enabled by `SummarySkill`).
+### 2. When to Reset? / 何時重置？
+Reset `task.md` ONLY when the current objective is **fully verified**.
 
-### 3. Archive / 歸檔
-When all tasks in `task.md` are marked `[x]`, the agent MUST:
-1.  Perform a final "Smart Commit".
-2.  Archive the completed `task.md` to `.internal/planning_archive/` (optional, based on project size).
+**Trigger Conditions**:
+1.  All items in `task.md` are marked `[x]`.
+2.  The "Smart Commit" for the finished task has been verified.
+3.  You are ready to pull the next item from the **War Room**.
+
+### 3. Archive & Sync Workflow / 歸檔與同步流程
+1.  **Archive**: Move current `task.md` content to `.internal/planning_archive/{Date}_{TaskName}.md`.
+2.  **Sync**: Read `.internal/planning/TODO_*.md`.
+3.  **Draft**: Select the next high-priority item and write a new plan into `task.md`.
+4.  **Update**: If new discoveries were made, update the **War Room** documents before starting.
+
+**Automated Command** (Recommended):
+```bash
+python devtools/cli.py task archive
+```
 
 ---
 

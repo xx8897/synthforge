@@ -551,6 +551,74 @@ def graph_show():
             click.echo(f"  - {node['name']} ({node['connections']} connections)")
 
 
+# Task Management Commands
+@cli.group()
+def task():
+    """
+    Task management commands
+    任務管理指令
+    """
+    pass
+
+
+@task.command('archive')
+def task_archive():
+    """
+    Archive current task.md
+    歸檔當前的 task.md
+    """
+    import shutil
+    from datetime import datetime
+    import re
+    
+    task_file = Path("task.md")
+    if not task_file.exists():
+        click.echo(click.style("❌ No task.md found to archive", fg='red'))
+        return
+        
+    content = task_file.read_text(encoding='utf-8')
+    
+    # Check if all tasks are done
+    pending = re.findall(r'-\s+\[ \]\s+(.+)', content)
+    in_progress = re.findall(r'-\s+\[/\]\s+(.+)', content)
+    
+    if pending or in_progress:
+        click.echo(click.style("⚠️  Warning: Unfinished tasks found!", fg='yellow'))
+        if not click.confirm("Do you still want to archive?"):
+            return
+            
+    # Generate archive name
+    date_str = datetime.now().strftime("%Y-%m-%d")
+    
+    # Try to extract a title
+    title_match = re.search(r'-\s+\[x\]\s+(.+)', content)
+    title_slug = "task_archive"
+    if title_match:
+        # Use first completed item as slug (simple heuristic)
+        title_slug = re.sub(r'[^\w\s-]', '', title_match.group(1)).strip().lower().replace(' ', '_')
+        title_slug = title_slug[:30] # Limit length
+    
+    archive_dir = Path(".internal/planning_archive")
+    archive_dir.mkdir(parents=True, exist_ok=True)
+    
+    target_name = f"{date_str}_{title_slug}.md"
+    target_path = archive_dir / target_name
+    
+    # Handle duplicates
+    counter = 1
+    while target_path.exists():
+        target_path = archive_dir / f"{date_str}_{title_slug}_{counter}.md"
+        counter += 1
+        
+    shutil.move(str(task_file), str(target_path))
+    click.echo(click.style(f"✅ Archived to: {target_path}", fg='green'))
+    
+    # Recreate empty task structure
+    task_file.write_text("# Current Objective\n\n- [ ] Plan next task\n", encoding='utf-8')
+    click.echo(click.style("🆕 Created fresh task.md", fg='cyan'))
+    click.echo("Don't forget to check .internal/planning/TODO_*.md for next tasks!")
+
+
 # Interactive Mode
 @cli.command()
 def interactive():
