@@ -33,7 +33,7 @@ The file [task.md](file:///c:/Users/xx8897/synthforge/task.md) is the **Mission 
 - **Workflow Engine** (`workflows/`) - Automated TDD and Refactoring.
 - **AI Agents** (`agents/`) - Specialized autonomous agents (Planner, Executor, etc.).
 - **Reusable Skills** (`skills/`) - Modular capabilities (Parser, Runner, etc.).
-- **Rules System** (`rules/`) - 22 strict governance rules.
+- **Rules System** (`rules/`) - 23 strict governance rules.
 
 ---
 
@@ -44,7 +44,7 @@ The file [task.md](file:///c:/Users/xx8897/synthforge/task.md) is the **Mission 
 
 1. **[rules/README.md](rules/README.md)** - Rules Index (🚨 Read FIRST)
 2. **[docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md)** - System Design
-3. **[docs/architecture/ROADMAP.md](docs/architecture/ROADMAP.md)** - Completion Status
+3. **[docs/architecture/ROADMAP_v2.md](docs/architecture/ROADMAP_v2.md)** - Completion Status
 4. **[docs/guides/GIT_WORKFLOW.md](docs/guides/GIT_WORKFLOW.md)** - Git & Workflow Guide
 5. **[devtools/README.md](devtools/README.md)** - Tooling Index
 
@@ -72,7 +72,7 @@ QUESTION: What is your task?
   │   → Use: python devtools/cli.py check --all
   │
   └─ "Check Status"
-      → Read: docs/architecture/ROADMAP.md
+      → Read: docs/architecture/ROADMAP_v2.md
 ```
 
 ---
@@ -125,5 +125,5 @@ python devtools/cli.py info
 **歡迎來到 synthforge v1.0！**
 
 **Status**: Production Ready ✅  
-**Version**: 2.0  
+**Version**: 3.0  
 **Last Updated**: 2026-02-02

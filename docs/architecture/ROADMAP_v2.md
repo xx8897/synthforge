@@ -1,280 +1,213 @@
-# synthforge Roadmap v2.0 🚀
-# synthforge 路線圖 v2.0
+# synthforge 路線圖 v2.0 🚀
 
-**Version**: 2.0  
-**Last Updated**: 2026-02-02  
-**Status**: v1.1.2 - Task Management Integrated  
-**Strategic Focus**: LangChain Ecosystem Integration & Advanced Intelligence
-
----
-
-## 🎯 Vision Statement / 願景宣言
-
-Transform synthforge from a **Development Automation Platform** into an **Intelligent Development Ecosystem** by integrating the best practices from LangChain, LangGraph, and Multi-Agent Frameworks.
-
-將 synthforge 從**開發自動化平台**轉型為**智能開發生態系統**，整合 LangChain、LangGraph 和多智能體框架的最佳實踐。
+**版本**: 2.0  
+**最後更新**: 2026-02-02  
+**狀態**: v1.1.3 - 任務管理已整合  
+**戰略重點**: LangChain 生態系整合與高級智能進階
 
 ---
 
-## 📊 Strategic Overview / 戰略總覽
+## 🎯 願景宣言
 
-| Phase | Focus Area | Timeline | Status |
+通過整合 LangChain、LangGraph 和多智能體框架 (MAF) 的最佳實踐，將 synthforge 從一個**「開發自動化平台」**轉型為一個**「智能開發生態系統」**。
+
+---
+
+## 📊 戰略總覽
+
+| 階段 | 核心領域 | 時間線 | 狀態 |
 |:---:|---|:---:|:---:|
-| **Phase 1-3** | Foundation & Core Features | ✅ Complete | 2026-01-28 ~ 02-01 |
-| **Phase 4** | Production Readiness | 🟡 In Progress | 2026-02-02 ~ 02-15 |
-| **Phase 5** | Intelligence Evolution | 🔵 Next | 2026-02-16 ~ 03-31 |
-| **Phase 6** | Ecosystem Maturity | 🔘 Planned | 2026-04-01 ~ 06-30 |
+| **階段 1-3** | 基礎建設與核心功能 | ✅ 已完成 | 2026-01-28 ~ 02-01 |
+| **階段 4** | 生產環境準備 (穩定性) | 🟡 進行中 | 2026-02-02 ~ 02-15 |
+| **階段 5** | 智能演進 (Intelligence Evolution) | 🔵 下一步 | 2026-02-16 ~ 03-31 |
+| **階段 6** | 生態系成熟化 | 🔘 規劃中 | 2026-04-01 ~ 06-30 |
 
 ---
 
-## 🛤️ Five Strategic Development Paths / 五大戰略發展路線
+## 🛤️ 五大戰略發展路線
 
-### Path A: 「輕量借鏡」Lightweight Inspiration
-**Goal**: Learn design patterns without adding dependencies  
-**目標**: 學習設計模式而不增加依賴
+### 路線 A：「輕量借鏡」(Lightweight Inspiration)
+**目標**：在不增加重度依賴的情況下，學習並實作優秀的設計模式。
 
-#### Milestones
-- **M1** (Week 1-2): LangGraph State Machine Analysis
-  - Study LangGraph's state graph architecture
-  - Document conditional edges and cycles patterns
-  - Create design proposal for Workflow v2.0
+#### 里程碑
+- **M1** (第 1-2 週)：LangGraph 狀態機分析
+  - 研究 LangGraph 的狀態圖架構
+  - 文檔化條件邊 (conditional edges) 與循環 (cycles) 模式
+  - 建立 Workflow v2.0 設計提案
+- **M2** (第 3-4 週)：MAF 通訊協議研究
+  - 分析 AutoGen 與 CrewAI 的消息傳遞機制
+  - 為 `agents/communication/` 設計輕量級協議
+  - 實作 Planner ↔ Executor 的概念驗證 (PoC)
+- **M3** (第 5-6 週)：提示工程框架 (Prompt Engineering)
+  - 從 LangChain Hub 提取最佳實踐
+  - 建立 `workflows/prompts/` 庫
+  - 實作 ReAct 與 CoT (思維鏈) 模板
 
-- **M2** (Week 3-4): MAF Communication Protocol Research
-  - Analyze AutoGen and CrewAI message passing
-  - Design lightweight protocol for `agents/communication/`
-  - Implement PoC with Planner ↔ Executor
-
-- **M3** (Week 5-6): Prompt Engineering Framework
-  - Extract best practices from LangChain Hub
-  - Create `workflows/prompts/` library
-  - Implement ReAct and CoT templates
-
-#### Deliverables
-- ✅ Design documents in `.internal/research/`
-- ✅ Prototype implementations in `experiments/`
-- ✅ Zero new dependencies
+**交付物**：
+- ✅ `.internal/research/` 中的設計文檔
+- ✅ `experiments/` 中的原型實作
+- ✅ 保持零新增依賴
 
 ---
 
-### Path B: 「文件處理專精」Document Processing Excellence
-**Goal**: Enable AI to read and process external documents  
-**目標**: 讓 AI 能夠讀取和處理外部文件
+### 路線 B：「文件處理專精」(Document Processing Excellence)
+**目標**：賦予 AI 閱讀和處理外部文件的能力。
 
-#### Milestones
-- **M1** (Week 1): Setup Integration Layer
-  ```bash
-  pip install langchain-core langchain-community
-  ```
-  - Create `skills/integration/` structure
-  - Implement `DocumentSkill` base class
+#### 里程碑
+- **M1** (第 1 週)：建立整合層
+  - 安裝必要套件：`pip install langchain-core langchain-community`
+  - 建立 `skills/integration/` 目錄結構
+  - 實作 `DocumentSkill` 基礎類別
+- **M2** (第 2 週)：核心加載器 (Loaders)
+  - PDF 加載器 (PyPDF2 + LangChain)
+  - 網頁爬取工具 (BeautifulSoup + LangChain)
+  - Excel/CSV 加載器
+- **M3** (第 3 週)：文本處理與切割
+  - 實作 `RecursiveCharacterTextSplitter` (遞歸字符切割)
+  - 加入程式碼感知切割 (Python, JS 等)
+  - 為不同文件類型建立區塊化 (Chunking) 策略
+- **M4** (第 4 週)：整合與測試
+  - CLI 指令：`python devtools/cli.py doc load <file>`
+  - 應用場景：載入 spec.pdf → 自動生成實作計畫
+  - 完成完整測試覆蓋
 
-- **M2** (Week 2): Core Loaders
-  - PDF Loader (PyPDF2 + LangChain)
-  - Web Scraper (BeautifulSoup + LangChain)
-  - Excel/CSV Loader
-
-- **M3** (Week 3): Text Processing
-  - Implement `RecursiveCharacterTextSplitter`
-  - Add code-aware splitting (Python, JS, etc.)
-  - Create chunking strategies for different doc types
-
-- **M4** (Week 4): Integration & Testing
-  - CLI command: `python devtools/cli.py doc load <file>`
-  - Use case: Load spec.pdf → Generate implementation plan
-  - Full test coverage
-
-#### Deliverables
+**交付物**：
 - ✅ `skills/integration/document_skill.py`
-- ✅ Support for PDF, Web, Excel, Markdown
-- ✅ CLI integration
-- ✅ 10+ unit tests
+- ✅ 支援 PDF, Web, Excel, Markdown
+- ✅ CLI 整合功能
+- ✅ 10 個以上的單元測試
 
 ---
 
-### Path C: 「狀態機革命」State Machine Revolution
-**Goal**: Transform Workflow engine with conditional logic  
-**目標**: 用條件邏輯改造 Workflow 引擎
+### 路線 C：「狀態機革命」(State Machine Revolution)
+**目標**：引入條件邏輯，全面改造 Workflow 引擎。
 
-#### Milestones
-- **M1** (Week 1-2): Architecture Design
-  - Design state graph data structure
-  - Define YAML v2.0 schema
-  - Plan backward compatibility strategy
+#### 里程碑
+- **M1** (第 1-2 週)：架構設計
+  - 設計狀態圖數據結構
+  - 定義 YAML v2.0 規約 (Schema)
+  - 制定向後兼容 (Backward Compatibility) 策略
+- **M2** (第 3-4 週)：核心實作
+  - 建立 `workflows/engine_v2/state_graph.py`
+  - 實作條件邊邏輯
+  - 加入基礎循環檢測功能
+- **M3** (第 5-6 週)：高級功能
+  - 建立檢查點系統 (Checkpointing)
+  - 狀態持久化至 `.internal/checkpoints/`
+  - 支援從檢查點恢復執行 (Resume)
+- **M4** (第 7-8 週)：遷移與測試
+  - 將現有的 `feature_development.yml` 轉換為 v2.0
+  - 建立遷移手冊
+  - 進行效能基準測試
 
-- **M2** (Week 3-4): Core Implementation
-  - Create `workflows/engine_v2/state_graph.py`
-  - Implement conditional edges
-  - Add basic cycle detection
-
-- **M3** (Week 5-6): Advanced Features
-  - Checkpoint system (`workflows/engine_v2/checkpoint.py`)
-  - State persistence to `.internal/checkpoints/`
-  - Resume from checkpoint
-
-- **M4** (Week 7-8): Migration & Testing
-  - Convert `feature_development.yml` to v2.0
-  - Create migration guide
-  - Performance benchmarking
-
-#### Deliverables
-- ✅ Workflow Engine v2.0
-- ✅ YAML v2.0 specification
-- ✅ Checkpoint/Resume capability
-- ✅ Backward compatible with v1.0
+**交付物**：
+- ✅ Workflow 引擎 v2.0
+- ✅ YAML v2.0 技術規約
+- ✅ 檢查點/恢復執行能力
+- ✅ 完全兼容 v1.0 工作流
 
 ---
 
-### Path D: 「多智能體協作」Multi-Agent Collaboration
-**Goal**: Enable true agent-to-agent communication  
-**目標**: 實現真正的智能體間通訊
+### 路線 D：「多智能體協作」(Multi-Agent Collaboration)
+**目標**：實現真正的智能體間通訊與動態協作。
 
-#### Milestones
-- **M1** (Week 1-2): Communication Infrastructure
-  - Design message protocol
-  - Implement `agents/communication/message_bus.py`
-  - Create message routing logic
+#### 里程碑
+- **M1** (第 1-2 週)：通訊基礎設施
+  - 設計消息協議 (Message Protocol)
+  - 實作 `agents/communication/message_bus.py`
+  - 建立消息路由邏輯
+- **M2** (第 3-4 週)：智能體升級
+  - 升級 Planner 使其具備查詢能力
+  - 升級 Executor 使其具備進度回報能力
+  - 升級 Reviewer 使其具備反饋發送能力
+- **M3** (第 5-6 週)：協作模式建構
+  - **順序模式 (Sequential)**：規劃 → 執行 → 審核
+  - **辯論模式 (Debate)**：多個 Reviewer 共同聯審
+  - **分層模式 (Hierarchical)**：管理者協調多個執行者
+- **M4** (第 7-8 週)：安全與監控
+  - 實作超時 (Timeout) 機制
+  - 加入消息日誌記錄
+  - 建立調試儀表板
 
-- **M2** (Week 3-4): Agent Upgrades
-  - Upgrade Planner to send queries
-  - Upgrade Executor to report progress
-  - Upgrade Reviewer to send feedback
-
-- **M3** (Week 5-6): Collaboration Patterns
-  - **Sequential**: Plan → Execute → Review
-  - **Debate**: Multiple Reviewers discuss
-  - **Hierarchical**: Planner coordinates multiple Executors
-
-- **M4** (Week 7-8): Safety & Monitoring
-  - Implement timeout mechanisms
-  - Add message logging
-  - Create debugging dashboard
-
-#### Deliverables
-- ✅ Message Bus system
-- ✅ 3 collaboration patterns
-- ✅ Agent communication protocol v1.0
-- ✅ Monitoring & debugging tools
+**交付物**：
+- ✅ 消息總線 (Message Bus) 系統
+- ✅ 3 種以上的協作模式
+- ✅ Agent 通訊協議 v1.0
+- ✅ 監控與調試工具
 
 ---
 
-### Path E: 「混合戰略」Hybrid Strategy ⭐ RECOMMENDED
-**Goal**: Balanced integration with phased rollout  
-**目標**: 分階段平衡整合
+### 路線 E：「混合戰略」(Hybrid Strategy) ⭐ **強烈推薦**
+**目標**：分階段推動技術整合，平衡風險與收益。
 
-#### Phase 5A: Quick Wins (Week 1-2)
-- Implement Document Loaders (from Path B)
-- Research LangGraph patterns (from Path A)
-- **Deliverable**: AI can read PDF specs
+#### 階段 5A：快速獲益 (第 1-2 週)
+- 實作文件加載器 (參考路線 B)
+- 研究 LangGraph 模式 (參考路線 A)
+- **交付目標**：AI 能夠讀取 PDF 需求說明書並理解上下文。
 
-#### Phase 5B: Workflow Intelligence (Week 3-4)
-- Implement basic conditional branches (from Path C)
-- Support `if-then-else` in YAML
-- **Deliverable**: Workflows can retry on failure
+#### 階段 5B：工作流智能化 (第 3-4 週)
+- 實作基礎條件分支 (參考路線 C)
+- YAML 支援 `if-then-else` 邏輯
+- **交付目標**：Workflow 遇到失敗時能自動觸發重試。
 
-#### Phase 5C: Agent Communication (Week 5-6)
-- Implement simple Message Bus (from Path D)
-- Enable Planner ↔ Executor dialogue
-- **Deliverable**: Agents can ask questions
+#### 階段 5C：智能體對話 (第 5-6 週)
+- 實作簡單的消息總線 (參考路線 D)
+- 開啟 Planner ↔ Executor 雙向對話
+- **交付目標**：智能體在遇到模糊需求時能主動發問。
 
-#### Phase 5D: Integration (Week 7-8)
-- Combine all three modules
-- End-to-end testing
-- Documentation update
-- **Deliverable**: Fully integrated system
+#### 階段 5D：全面整合 (第 7-8 週)
+- 整合上述三大模組
+- 端到端 (End-to-End) 測試
+- 更新所有架構文檔與規則
+- **交付目標**：一個完整、自癒且具備感知能力的系統。
 
-#### Phase 5E: Optimization (Week 9-10)
-- Performance tuning
-- User feedback incorporation
-- Production deployment
-- **Deliverable**: v2.0.0 Release
-
----
-
-## 🎯 Recommended Path Selection Matrix
-
-| Your Priority | Recommended Path | Reason |
-|--------------|------------------|--------|
-| **Fast ROI** | Path B (Document Processing) | Immediate value, low risk |
-| **Long-term Vision** | Path E (Hybrid) ⭐ | Balanced, comprehensive |
-| **Innovation** | Path C (State Machine) | Cutting-edge workflow engine |
-| **Team Collaboration** | Path D (Multi-Agent) | Enable complex projects |
-| **Zero Dependencies** | Path A (Lightweight) | Full control, no external libs |
+#### 階段 5E：優化與正式發布 (第 9-10 週)
+- 效能調優
+- 結合用戶反饋進行微調
+- 正式部署至生產環境
+- **交付目標**：發布 synthforge v2.0.0 正式版。
 
 ---
 
-## 📈 Success Metrics / 成功指標
+## 🎯 決策矩陣：如何選擇路徑？
 
-### Phase 5 KPIs
-- **Development Speed**: 30% faster feature implementation
-- **Code Quality**: 90%+ test coverage
-- **Agent Autonomy**: 50% reduction in human intervention
-- **System Reliability**: 99% uptime for critical workflows
-
-### Phase 6 KPIs
-- **Community Adoption**: 100+ GitHub stars
-- **Plugin Ecosystem**: 10+ community-contributed skills
-- **Enterprise Readiness**: SOC2 compliance
-- **AI Performance**: GPT-4 level reasoning in specialized domains
+| 您優先考慮的是？ | 推薦路徑 | 理由 |
+|:---|:---|:---|
+| **快速投資回報 (ROI)** | **路線 B (文件處理)** | 價值立見，風險最低 |
+| **長期技術願景** | **路線 E (混合戰略) ⭐** | 全面且穩健，最符合長遠利益 |
+| **技術創新** | **路線 C (狀態機)** | 打造領先業界的自適應工作流引擎 |
+| **複雜專案協作** | **路線 D (多智能體)** | 適合需要多方配合的大型開發任務 |
+| **極致掌控/零依賴** | **路線 A (輕量借鏡)** | 完全自主開發，不依賴任何外部庫 |
 
 ---
 
-## 🗓️ Detailed Timeline (Path E - Hybrid Strategy)
+## 📈 成功指標 (KPIs)
 
-```mermaid
-gantt
-    title Synthforge v2.0 Development Timeline
-    dateFormat  YYYY-MM-DD
-    section Phase 5A
-    Document Loaders           :2026-02-16, 14d
-    section Phase 5B
-    Workflow Conditionals      :2026-03-02, 14d
-    section Phase 5C
-    Agent Communication        :2026-03-16, 14d
-    section Phase 5D
-    Integration & Testing      :2026-03-30, 14d
-    section Phase 5E
-    Optimization & Release     :2026-04-13, 14d
-```
+### 階段 5 關鍵指標
+- **開發效率**：特徵實作速度提升 30%
+- **代碼質量**：測試覆蓋率達 90% 以上
+- **Agent 自治度**：人工干預次數減少 50%
+- **系統穩定性**：關鍵工作流運行時長達 99%
 
 ---
 
-## 🚀 Immediate Next Steps (This Week)
+## 🚀 立即行動 (本週啟動)
 
-### If choosing Path E (Hybrid)
-1. **Day 1-2**: Install `langchain-core` and `langchain-community`
-2. **Day 3-4**: Create `skills/integration/document_skill.py`
-3. **Day 5**: Implement PDF loader
-4. **Day 6-7**: Write tests and documentation
+### 若選擇路線 E (混合戰略)
+1. **第 1-2 天**：安裝環境 `langchain-core` 與 `langchain-community`
+2. **第 3-4 天**：開發 `skills/integration/document_skill.py`
+3. **第 5 天**：實作 PDF 加載器與初步解析邏輯
+4. **第 6-7 天**：編寫測試與更新操作指南 (GUIDE)
 
-### Task Checklist
-- [ ] Update `task.md` with Phase 5A milestones
-- [ ] Create `skills/integration/` directory
-- [ ] Install dependencies
-- [ ] Implement first Document Loader
-- [ ] Write integration tests
-- [ ] Update ARCHITECTURE.md to reflect new components
+### 任務檢查清單 (Task Checklist)
+- [ ] 在 `task.md` 中更新階段 5A 的里程碑
+- [ ] 初始化 `skills/integration/` 目錄
+- [ ] 執行依賴安裝
+- [ ] 完成第一個 Document Loader 實作
 
 ---
 
-## 🔗 Related Documents
-
-- [Integration Strategy](file:///c:/Users/xx8897/.gemini/antigravity/brain/d92ecf9d-b022-4416-8dfb-77b91f67f657/integration_strategy.md)
-- [ARCHITECTURE.md](file:///c:/Users/xx8897/synthforge/docs/architecture/ARCHITECTURE.md)
-- [VIBE_GUIDE.md](file:///c:/Users/xx8897/synthforge/VIBE_GUIDE.md)
-- [Task Management Rule](file:///c:/Users/xx8897/synthforge/rules/management/TASK_MANAGEMENT_RULE.md)
-
----
-
-## 📝 Version History
-
-| Version | Date | Changes |
-|---------|------|---------|
-| 1.0 | 2026-02-01 | Initial roadmap with Phases 1-4 |
-| 2.0 | 2026-02-02 | Added 5 strategic paths with LangChain integration |
-
----
-
-**Last Updated**: 2026-02-02  
-**Status**: v1.1.2 (Task Management Integrated)  
-**Next Milestone**: Phase 5A - Document Processing (Week 1-2)  
-**Maintainer**: xx8897
+**最後更新日期**: 2026-02-02  
+**當前狀態**: v1.1.3 (任務管理已整合)  
+**下一個里程碑**: 階段 5A - 文件處理 (第 1-2 週)  
+**維護者**: xx8897

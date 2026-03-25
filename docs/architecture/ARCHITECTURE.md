@@ -75,7 +75,7 @@ synthforge/
 │   └── tests/                       ← Integration tests
 │
 ├── 📁 docs/ ← Documentation (文件)
-│   ├── architecture/                ← ARCHITECTURE.md, ROADMAP.md
+│   ├── architecture/                ← ARCHITECTURE.md, ROADMAP_v2.md
 │   ├── guides/                      ← GIT_WORKFLOW.md, WORKFLOW_GUIDE.md
 │   └── README.md
 │

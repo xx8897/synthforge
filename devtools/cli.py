@@ -12,6 +12,9 @@ Commands:
     analyze     Analyze dependencies and licenses
     workflow    Workflow automation commands
     git         Git automation commands
+    graph       Knowledge graph commands
+    task        Task management commands
+    doc         Document processing commands
     interactive Interactive mode
     help        Show detailed help
 """
@@ -617,6 +620,57 @@ def task_archive():
     task_file.write_text("# Current Objective\n\n- [ ] Plan next task\n", encoding='utf-8')
     click.echo(click.style("🆕 Created fresh task.md", fg='cyan'))
     click.echo("Don't forget to check .internal/planning/TODO_*.md for next tasks!")
+
+
+# Document Processing Commands
+@cli.group()
+def doc():
+    """
+    Document processing commands
+    文件處理指令
+    """
+    pass
+
+
+@doc.command('load')
+@click.argument('source')
+@click.option('--type', 'source_type', type=click.Choice(['pdf', 'url']), default='pdf')
+@click.option('--split', is_flag=True, help='Split document into chunks')
+def doc_load(source, source_type, split):
+    """
+    Load document from PDF or URL
+    從 PDF 或網址載入文件
+    """
+    from skills.integration.document_skill import document_skill
+    
+    click.echo(f"加載 {source_type}: {source}...")
+    
+    try:
+        if source_type == 'pdf':
+            docs = document_skill.load_pdf(source)
+        else:
+            docs = document_skill.load_url(source)
+            
+        click.echo(click.style(f"✅ Successfully loaded {len(docs)} pages/documents", fg='green'))
+        
+        if split:
+            click.echo("正在進行文件切割...")
+            chunks = document_skill.split_documents(docs)
+            click.echo(click.style(f"✅ Created {len(chunks)} chunks", fg='green'))
+            
+            # Show a preview of the first chunk
+            if chunks:
+                click.echo("\n--- 第一個區塊預覽 (Preview of first chunk) ---")
+                preview = chunks[0].page_content[:500] + "..."
+                click.echo(preview)
+        else:
+            # Just show some metadata
+            if docs:
+                click.echo("\n--- 文件內容預覽 (Preview of first page) ---")
+                click.echo(docs[0].page_content[:500] + "...")
+                
+    except Exception as e:
+        click.echo(click.style(f"❌ Error loading document: {e}", fg='red'))
 
 
 # Interactive Mode

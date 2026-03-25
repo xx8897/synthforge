@@ -4,9 +4,9 @@
 > **🤖 FOR AI AGENTS**: Read [VIBE_GUIDE.md](VIBE_GUIDE.md) FIRST before proceeding.  
 > **給 AI 代理**: 請先閱讀 [VIBE_GUIDE.md](VIBE_GUIDE.md)。
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/xx8897/synthforge)
+[![Version](https://img.shields.io/badge/version-1.1.3-blue.svg)](https://github.com/xx8897/synthforge)
 [![License](https://img.shields.io/badge/license-Dual--License-green.svg)](LICENSE)
-[![Status](https://img.shields.io/badge/status-Production%20Ready-success.svg)](docs/architecture/ROADMAP.md)
+[![Status](https://img.shields.io/badge/status-Production%20Ready-success.svg)](docs/architecture/ROADMAP_v2.md)
 
 ---
 
@@ -21,9 +21,10 @@
 - **🤖 4 Specialized AI Agents** - Planner, Executor, Reviewer, Self-Improvement
 - **⚡ Automated Workflows** - TDD, Feature Development, Bug Fixing, Refactoring
 - **🔧 Unified CLI** - One command for all operations
-- **📋 22 Governance Rules** - Ensure code quality and consistency
+- **📋 23 Governance Rules** - Ensure code quality and consistency
 - **🌳 Git Worktrees** - Isolated development environments
 - **🔒 Security First** - Built-in security scanning and auditing
+- **📊 Mission Control** - Integrated progress tracking via `task.md`
 
 ---
 
@@ -70,6 +71,10 @@ python devtools/cli.py git pr --title "New Feature"
 # Security check
 # 安全檢查
 python devtools/cli.py check --all
+
+# Document processing
+# 文件處理
+python devtools/cli.py doc load spec.pdf --split
 ```
 
 ---
@@ -80,9 +85,10 @@ python devtools/cli.py check --all
 synthforge/
 ├── 📄 README.md                 ← You are here / 你在這裡
 ├── 📄 VIBE_GUIDE.md             ← AI agent entry point / AI 代理入口
+├── 📄 task.md                   ← Mission Control Tracker
 ├── 📄 LICENSE                   ← Dual License (AGPL-3.0 + Commercial)
 │
-├── 📁 rules/                    ← 22 governance rules / 22 條治理規則
+├── 📁 rules/                    ← 23 governance rules / 23 條治理規則
 │   ├── core/                    ← Mandatory rules / 強制規則
 │   ├── development/             ← Development rules / 開發規則
 │   └── management/              ← Management rules / 管理規則
@@ -112,7 +118,7 @@ synthforge/
 │   └── git/                     ← Git automation / Git 自動化
 │
 └── 📁 docs/                     ← Documentation / 文件
-    ├── architecture/            ← System design / 系統設計
+    ├── architecture/            ← System design / 系統設計 (ROADMAP_v2.md)
     └── guides/                  ← User guides / 使用指南
 ```
 
@@ -160,22 +166,6 @@ git branch -d feature/user-auth
 > **💡 Pro Tip**: The `-a` parameter automatically stages all modified files, so you don't need `git add`!  
 > **💡 專業提示**: `-a` 參數會自動暫存所有已修改的文件，所以您不需要 `git add`！
 
-### Manual Git Operations / 手動 Git 操作
-
-If you prefer manual control:
-
-如果您偏好手動控制：
-
-```bash
-# Standard git commands work as usual
-git add .
-git commit -m "feat: your message"
-git push origin main
-
-# Or use the CLI for convenience
-python devtools/cli.py git commit -m "feat: your message" -a
-```
-
 ---
 
 ## 📊 Current Status / 當前狀態
@@ -185,11 +175,11 @@ python devtools/cli.py git commit -m "feat: your message" -a
 | **Phase 1: Foundation** | ✅ Complete | 100% |
 | **Phase 2: Developer Experience** | ✅ Complete | 100% |
 | **Phase 3: Intelligence** | ✅ Complete | 100% |
-| **Phase 4: Production & Scale** | 🚧 In Progress | 20% |
+| **Phase 4: Production & Scale** | 🚧 In Progress | 30% |
 
-See [ROADMAP.md](docs/architecture/ROADMAP.md) for detailed progress.
+See [ROADMAP_v2.md](docs/architecture/ROADMAP_v2.md) for detailed progress.
 
-查看 [ROADMAP.md](docs/architecture/ROADMAP.md) 了解詳細進度。
+查看 [ROADMAP_v2.md](docs/architecture/ROADMAP_v2.md) 了解詳細進度。
 
 ---
 
@@ -197,7 +187,7 @@ See [ROADMAP.md](docs/architecture/ROADMAP.md) for detailed progress.
 
 - **[VIBE_GUIDE.md](VIBE_GUIDE.md)** - AI agent entry point / AI 代理入口
 - **[ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md)** - System architecture / 系統架構
-- **[ROADMAP.md](docs/architecture/ROADMAP.md)** - Feature roadmap / 功能路線圖
+- **[ROADMAP_v2.md](docs/architecture/ROADMAP_v2.md)** - Strategic roadmap / 戰略路線圖
 - **[GIT_WORKFLOW.md](docs/guides/GIT_WORKFLOW.md)** - Git workflow guide / Git 工作流程指南
 - **[rules/README.md](rules/README.md)** - All governance rules / 所有治理規則
 
@@ -213,104 +203,17 @@ See [ROADMAP.md](docs/architecture/ROADMAP.md) for detailed progress.
 
 ---
 
-## 🛠️ Available Commands / 可用命令
-
-### Workflow Commands / 工作流命令
-
-```bash
-python devtools/cli.py workflow list              # List all workflows
-python devtools/cli.py workflow run <file>        # Run a workflow
-python devtools/cli.py workflow validate <file>   # Validate workflow
-```
-
-### Git Commands / Git 命令
-
-```bash
-python devtools/cli.py git commit -m "message"    # Commit changes
-python devtools/cli.py git push                   # Push to remote
-python devtools/cli.py git pr --title "title"     # Create PR
-```
-
-### Project Commands / 專案命令
-
-```bash
-python devtools/cli.py new --name=<name>          # Create new project
-python devtools/cli.py check --all                # Run all checks
-python devtools/cli.py analyze <path>             # Analyze dependencies
-```
-
-### Utility Commands / 工具命令
-
-```bash
-python devtools/cli.py info                       # Show system info
-python devtools/cli.py interactive                # Interactive mode
-python devtools/cli.py help                       # Show help
-```
-
----
-
-## 🤝 Contributing / 貢獻
-
-This is a personal project, but contributions are welcome!
-
-這是個人專案，但歡迎貢獻！
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
----
-
 ## 📄 License / 授權
 
 This project is licensed under a Dual License (AGPL-3.0 + Commercial) - see the [LICENSE](LICENSE) file for details.
 
 本專案採用雙重授權 (AGPL-3.0 + 商業授權) - 詳見 [LICENSE](LICENSE) 文件。
 
-**What this means / 這意味著什麼**:
-- ✅ You can use this commercially / 可商業使用
-- ✅ You can modify it / 可修改
-- ✅ You can distribute it / 可分發
-- ✅ You can use it privately / 可私人使用
-- ⚠️ You must include the license / 必須包含授權聲明
-- ⚠️ No warranty provided / 不提供保證
-
 ---
 
 ## 👤 Author / 作者
 
 **xx8897**
-
-- GitHub: [@xx8897](https://github.com/xx8897)
-- Email: zhixiang8897@gmail.com
-
----
-
-## 🙏 Acknowledgments / 致謝
-
-Inspired by modern AI development practices from:
-- OpenAI
-- Anthropic
-- Google DeepMind
-
-靈感來自現代 AI 開發實踐：
-- OpenAI
-- Anthropic
-- Google DeepMind
-
----
-
-## 📈 Version History / 版本歷史
-
-### v1.0.0 (2026-02-02) - Production Ready
-- ✅ Complete rule system (22 rules)
-- ✅ 4 AI agents (Planner, Executor, Reviewer, Self-Improvement)
-- ✅ Automated workflows (Feature, BugFix, Refactor)
-- ✅ Git automation and worktrees
-- ✅ Security scanning and auditing
-- ✅ Knowledge graph system
 
 ---
 

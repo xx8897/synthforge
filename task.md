@@ -1,23 +1,15 @@
-# Task: Smart Git Automation & Tagging
+# Phase 5B: Workflow Intelligence (路線 E - 階段 5B)
 
-- [ ] Define Smart Git Rules (`rules/development/SMART_GIT_RULE.md`) [/]
-- [ ] Implement `SmartGitHandler` (`core_lib/git/smart_handler.py`) [ ]
-    - [ ] Version increment logic (Generic SemVer)
-    - [ ] Change analysis logic (Commit message suggestion)
-    - [ ] Auto-commit orchestrator
-- [ ] Integrate into CLI (`devtools/cli.py`) [ ]
-    - [ ] `git tag --auto` command
-    - [ ] `git smart-commit` command
-- [ ] Verification & Testing [ ]
-    - [ ] Create `core_lib/git/tests/test_smart_handler.py`
-    - [ ] Verify versioning logic
-    - [ ] Verify message suggestion logic
-- [ ] Documentation Update [x]
-    - [x] Update `docs/guides/GIT_WORKFLOW.md` with smart features
-    - [x] Update `README.md`
-- [x] Summary-Aware Git & Graph Visualization [x]
-    - [x] Create `skills/automation/summary_skill.py` [x]
-    - [x] Create `rules/management/GRAPH_RELATIONSHIP_RULE.md` [x]
-    - [x] Enhance `SmartGitHandler` with Summary Skill [x]
-    - [x] Integrate `graph` command into `cli.py` [x]
-    - [x] Generate initial Knowledge Map [x]
+## 📐 架構設計 / Architecture & Design
+- [x] 定義 YAML v2.0 規約 (支援 `if-then-else`) [x]
+- [ ] 撰寫 Workflow v2.0 執行邏輯設計文檔 [/]
+
+## ⚙️ 引擎開發 / Engine Development
+- [ ] 實作條件邊 (Conditional Edges) 邏輯 [ ]
+- [ ] 支援 失敗重試 (Retry Strategy) 機制 [ ]
+- [ ] 實作 基礎循環檢測 (Cycle Detection) [ ]
+
+## 🧪 驗證與遷移 / Verification & Migration
+- [ ] 建立 測試案例 (YAML v2.0 範例) [ ]
+- [ ] 整合進 CLI (`workflow run --v2`) [ ]
+- [ ] 撰寫 遷移指南與文檔 [ ]
