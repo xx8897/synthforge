@@ -1,0 +1,296 @@
+---
+title: "架構地圖"
+document_type: architecture
+version: 1.0
+language: zh-TW
+modules:
+  - name: rules
+    role: 治理層
+    dependency_direction: "被所有模組讀取，不依賴其他模組"
+  - name: core_lib
+    role: 共享基礎設施
+    dependency_direction: "被 devtools/agents/skills 引用，不反向依賴"
+  - name: skills
+    role: 無狀態可重用能力
+    dependency_direction: "依賴 core_lib，被 workflows 調用"
+  - name: agents
+    role: 有狀態 AI 代理
+    dependency_direction: "依賴 core_lib + skills，被 workflows 調用"
+  - name: workflows
+    role: 工作流引擎（編排層）
+    dependency_direction: "調用 skills 和 agents"
+  - name: devtools
+    role: 開發工具箱
+    dependency_direction: "依賴 core_lib，工具層入口"
+data_flow: "User → CLI → Workflow Engine → (Skills | Agents) → core_lib → Results"
+entry_points:
+  - devtools/cli.py
+  - VIBE_GUIDE.md
+  - task.md
+related_documents:
+  - 00_OVERVIEW.md
+  - 04_SKILLS_AND_AGENTS.md
+  - 05_WORKFLOW_ENGINE.md
+tags: [architecture, modules, data-flow, dependency]
+---
+
+# 架構地圖
+
+> 架構不是畫出來的，是長出來的。synthforge 的架構反映了「先治理、後實作」的思路——規則先到位，工具跟上去，引擎最後接。
+
+## 全局架構
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                        使用者 / AI 代理                        │
+│                    (Cursor / Copilot / Claude)               │
+└──────────────┬────────────────────────────┬───────────────────┘
+               │                            │
+               ▼                            ▼
+     ┌─────────────────┐          ┌──────────────────┐
+     │  VIBE_GUIDE.md  │          │    task.md       │
+     │   (導航入口)     │          │  (任務控制中心)    │
+     └────────┬────────┘          └────────┬─────────┘
+              │                            │
+              ▼                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│                      rules/ 治理層                             │
+│  ┌──────────┐  ┌──────────────┐  ┌──────────────┐          │
+│  │  core/    │  │ development/ │  │ management/  │          │
+│  │ 7 條強制  │  │ 11 條推薦     │  │ 4 條建議     │          │
+│  └──────────┘  └──────────────┘  └──────────────┘          │
+└─────────────────────────┬───────────────────────────────────┘
+                          │（被所有模組讀取）
+                          ▼
+┌─────────────────────────────────────────────────────────────┐
+│                    devtools/ 工具箱入口                        │
+│  ┌──────────┐  ┌────────────────┐  ┌─────────────────┐    │
+│  │  cli.py   │  │knowledge_graph │  │structure_optimizer│    │
+│  │ (7命令群) │  │  (關係映射)     │  │  (檔案重構)      │    │
+│  └─────┬────┘  └────────────────┘  └─────────────────┘    │
+└────────┼────────────────────────────────────────────────────┘
+         │
+         ▼
+┌─────────────────────────────────────────────────────────────┐
+│                  workflows/ 編排層                            │
+│  ┌──────────┐  ┌────────────┐  ┌──────────┐  ┌────────┐   │
+│  │ parser   │  │ validators │  │ executor │  │context │   │
+│  └──────────┘  └────────────┘  └────┬─────┘  └────────┘   │
+│  ┌──────────────────────────────────────────────────────┐   │
+│  │ templates/ (feature_development, bug_fix, ...)       │   │
+│  └──────────────────────────────────────────────────────┘   │
+└─────────────────────────┬───────────────────────────────────┘
+                          │（調用）
+                    ┌─────┴─────┐
+                    ▼           ▼
+        ┌──────────────┐  ┌──────────────┐
+        │  skills/     │  │  agents/     │
+        │ (無狀態能力)  │  │ (有狀態代理)  │
+        └──────┬───────┘  └──────┬───────┘
+               │                  │
+               ▼                  ▼
+        ┌─────────────────────────────────┐
+        │         core_lib/ 基礎設施        │
+        │  ┌───────────┐  ┌──────────┐    │
+        │  │  utils/   │  │   git/   │    │
+        │  │(檔案操作) │  │(Git自動化)│    │
+        │  └───────────┘  └──────────┘    │
+        └─────────────────────────────────┘
+```
+
+## 依賴方向
+
+依賴方向是嚴格的，定義在 `TOOLING_USAGE_RULE.md`：
+
+```
+rules ──→ (被讀取) ──→ 所有模組
+
+devtools ──→ (可引用) ──→ core_lib
+skills  ──→ (可引用) ──→ core_lib
+agents  ──→ (可引用) ──→ core_lib + skills
+
+core_lib ──/X──→ devtools   （禁止反向依賴）
+core_lib ──/X──→ agents     （禁止反向依賴）
+core_lib ──/X──→ skills     （禁止反向依賴）
+```
+
+核心原則：**`core_lib` 是 runtime 依賴，`devtools` 是 dev 依賴。** `core_lib` 不能引用任何上層模組。
+
+## 三個入口
+
+| 入口 | 類型 | 服務對象 | 觸發方式 |
+|------|------|---------|---------|
+| `VIBE_GUIDE.md` | 導航 | AI 代理 | AI 代理進入專案時讀取 |
+| `devtools/cli.py` | 命令 | 人類 + AI | CLI 命令或 interactive shell |
+| `task.md` | 狀態 | 兩者都服務 | 代理每次啟動檢查，人類手動更新 |
+
+## 目錄職責
+
+### `rules/` — 治理層
+
+```
+rules/
+├── core/               # 🔴 強制規則（7 條）
+│   ├── DIRECTORY_README_RULE.md      # 最長的規則，573 行
+│   ├── BILINGUAL_OUTPUT_RULE.md      # 三層語言策略
+│   ├── AGENT_WORKFLOW_RULE.md        # 任務→規則路由表
+│   ├── DRY_RULE.md                   # Balanced DRY，448 行
+│   ├── SINGLE_SOURCE_OF_TRUTH_RULE.md # 最短，65 行
+│   ├── SERIES_TASK_WORKFLOW_RULE.md   # 串聯任務的工作流
+│   └── VIBE_GUIDE_SYNC_RULE.md       # VIBE_GUIDE 更新策略
+├── development/        # 🟡 推薦規則（11 條）
+│   ├── TDD_RULE.md                  # 測試驅動開發
+│   ├── WORKFLOW_INTEGRATION_RULE.md  # Skill/Agent 標準接口
+│   ├── AGENT_STRUCTURE_RULE.md       # Agent 目錄結構
+│   ├── CODING_STYLE_RULE.md          # 小函數、SRP、型別提示
+│   ├── SPEC_DRIVEN_DEVELOPMENT_RULE.md # Spec→Plan→Implement→Verify
+│   ├── TOOLING_USAGE_RULE.md         # core_lib vs devtools
+│   ├── FILE_CLASSIFICATION_RULE.md    # 檔案分類決策樹
+│   ├── FILE_NAMING_CONVENTION_RULE.md # 命名慣例
+│   ├── INTERNAL_RULE.md              # .internal/ 管理規則（合併自 4 條）
+│   ├── TASK_SUMMARY_RULE.md           # 總結格式
+│   └── TODO_UPDATE_RULE.md            # TODO 追蹤
+└── management/         # 🔵 建議規則（4 條）
+    ├── TASK_MANAGEMENT_RULE.md        # task.md 作為 Mission Control
+    ├── KNOWLEDGE_BASE_RULE.md          # 知識萃取時機與方式
+    ├── GRAPH_RELATIONSHIP_RULE.md      # 機器可讀的關聯元資料
+    └── (SMART_GIT_RULE + GIT_EXECUTION_RULE 在 development/)
+```
+
+### `skills/` — 無狀態可重用能力
+
+```
+skills/
+├── automation/
+│   └── structure_management/    # 目錄結構重構操作
+├── workflow_skills/
+│   ├── spec_parser/            # 解析 implementation_plan.md → JSON
+│   ├── task_generator/         # 從 spec JSON 生成 task.md
+│   └── test_runner/            # 執行 pytest + 覆蓋率報告
+├── integration/
+│   └── document_skill/         # PDF/URL 載入與分割
+└── README.md                   # Skills 索引與介面定義
+```
+
+共同接口：`skill_function(input_data, config=None) -> Dict[str, Any]`，返回 `{'success': bool, 'output': Any, 'errors': []}`。
+
+### `agents/` — 有狀態 AI 代理
+
+```
+agents/
+├── planner_agent/              # 規劃與設計
+├── executor_agent/             # 實作與執行
+├── reviewer_agent/             # 代碼審查
+├── self_improvement_agent/     # 自我學習與改進
+└── README.md                   # Agents 索引與定義
+```
+
+每個代理標準結構：`AGENT.md`（文檔）+ `config.yml`（配置）+ `<name>.py`（實作）。
+
+共同接口：`async action(input, config) -> Dict[str, Any]`，返回 `{'success': bool, ...}`。
+
+### `workflows/` — 工作流引擎
+
+```
+workflows/
+├── engine/
+│   ├── parser.py              # YAML → WorkflowDefinition dataclass
+│   ├── validators.py           # 驗證工作流定義
+│   ├── executor.py             # 逐階段執行（目前為 placeholder）
+│   └── context.py              # 執行狀態管理，可序列化
+├── templates/
+│   ├── feature_development.yml # specify → plan → execute → test → review
+│   ├── bug_fix.yml              # diagnose → plan → fix → verify
+│   ├── refactoring.yml          # analyze → plan → refactor → verify
+│   └── rule_creation.yml        # research → draft → review → integrate
+├── examples/
+├── tests/
+└── WORKFLOW_RULE.md
+```
+
+### `core_lib/` — 共享基礎設施
+
+```
+core_lib/
+├── utils/
+│   └── files.py                # ensure_dir_exists, batch_create_dirs, list_directory_tree
+├── git/                        # GitAutomation, SmartGitHandler, GitWorktreeManager
+│                               # （引用但實作未見）
+└── README.md
+```
+
+### `devtools/` — 開發工具箱
+
+```
+devtools/
+├── cli.py                      # 統一 CLI（726 行，7 大命令群）
+├── knowledge_graph.py           # 掃描規則 frontmatter → Mermaid 關聯圖
+├── structure_optimizer.py      # 檔案重構（dry-run 模式）
+├── analyzers/                   # 代碼分析器
+├── security/                    # 安全稽核工具
+├── project/                     # 專案模板
+├── release/                     # 發布工具
+├── tests/                       # 測試
+└── README.md
+```
+
+## 資料流
+
+```
+使用者需求
+    │
+    ▼
+task.md（Mission Control，記錄優先順序和進度）
+    │
+    ▼
+VIBE_GUIDE.md（決策樹，決定用哪個工作流）
+    │
+    ▼
+CLI / Workflow Engine
+    │
+    ├──→ parser.py（解析 YAML）
+    ├──→ validators.py（驗證定義）
+    └──→ executor.py（執行）
+              │
+              ├──→ Skills（無狀態能力）
+              │     ├── spec_parser
+              │     ├── task_generator
+              │     └── test_runner
+              │
+              ├──→ Agents（有狀態代理）
+              │     ├── planner_agent
+              │     ├── executor_agent
+              │     └── reviewer_agent
+              │
+              └──→ core_lib（基礎設施）
+                    ├── utils/files.py
+                    └── git/*
+              │
+              ▼
+         ExecutionContext（結果 + 狀態，可序列化）
+```
+
+## .internal/ 隱藏架構
+
+`.gitignore` 排除了 `.internal/`，但規則系統大量引用它：
+
+```
+.internal/
+├── knowledge/           # 萃取的知識（由 KNOWLEDGE_BASE_RULE 管理）
+│   ├── best_practices/
+│   ├── patterns/
+│   ├── troubleshooting/
+│   ├── references/
+│   ├── tools/
+│   └── lessons_learned/
+├── confirmations/       # 待確認的決策文件
+│   └── pending/
+├── planning/            # 規劃文件
+│   └── 待辦.md
+├── learning/            # 學習資料庫
+│   └── improvements.json
+└── summaries/           # 任務總結
+    └── YYYY-MM/
+```
+
+這是一個不進 Git 的隱藏層——它是 AI 代理的工作記憶，用來跨會話保持上下文。不提交、不推送、只在本機。
